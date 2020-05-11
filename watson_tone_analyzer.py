@@ -1,6 +1,7 @@
 from ibm_watson import ToneAnalyzerV3
 from ibm_watson import LanguageTranslatorV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from googletrans import Translator
 
 # Sets the text file to get comments from.
 file = "comment.txt"
@@ -26,20 +27,22 @@ translator = LanguageTranslatorV3(
 
 tone_analyzer.set_service_url(url_ta)
 translator.set_service_url(url_tl)
+translator = Translator()
 
 
 # Analyze the tone of the input text.
 def analyze(file):
 
     # Get comment from text file.
-    with open(file, "r") as f:
+    with open(file, "r", encoding="utf8") as f:
         comment = f.read().replace("\n", " ")
 
     # Translate comment and analyze the tone.
-    translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
+    # translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
+    translation = translator.translate(comment).text
     tone_analysis = tone_analyzer.tone({'text': translation}, content_type='application/json').get_result()
 
-    with open("tone_analysis.txt", "w") as f:
+    with open("tone_analysis.txt", "w", encoding="utf8") as f:
         f.write("Comment: " + "\n" + comment + "\n"*2)
         f.write("Translation: " + "\n" + translation + "\n" * 2)
         f.write("Tone:" + "\n")
