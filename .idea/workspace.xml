@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="" />
+    <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589306952847</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Minor text files">
+      <created>1589306991368</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1589306991368</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -106,33 +115,37 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
-    <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1589306952509">
+    <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1589306991081">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306952509" />
-    <state width="629" height="148" key="GridCell.Tab.0.bottom" timestamp="1589306972784">
+    <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306991081" />
+    <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1589307014079">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="629" height="148" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306972784" />
-    <state width="629" height="148" key="GridCell.Tab.0.center" timestamp="1589306972784">
+    <state x="421" y="81" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307014079" />
+    <state width="629" height="148" key="GridCell.Tab.0.bottom" timestamp="1589307120237">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="629" height="148" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306972784" />
-    <state width="629" height="148" key="GridCell.Tab.0.left" timestamp="1589306972784">
+    <state width="629" height="148" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307120237" />
+    <state width="629" height="148" key="GridCell.Tab.0.center" timestamp="1589307120237">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="629" height="148" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306972784" />
-    <state width="629" height="148" key="GridCell.Tab.0.right" timestamp="1589306972784">
+    <state width="629" height="148" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307120237" />
+    <state width="629" height="148" key="GridCell.Tab.0.left" timestamp="1589307120237">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="629" height="148" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306972784" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1589286572775">
+    <state width="629" height="148" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307120237" />
+    <state width="629" height="148" key="GridCell.Tab.0.right" timestamp="1589307120237">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="142" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286572775" />
-    <state x="233" y="69" key="Vcs.Push.Dialog.v2" timestamp="1589306960840">
+    <state width="629" height="148" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307120237" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1589307021330">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306960840" />
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307021330" />
+    <state x="233" y="69" key="Vcs.Push.Dialog.v2" timestamp="1589306993256">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589306993256" />
   </component>
 </project>
