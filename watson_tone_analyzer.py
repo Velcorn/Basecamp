@@ -49,7 +49,7 @@ def analyze(file):
         for tone in tone_analysis['document_tone']['tones']:
             f.write(tone['tone_name'] + ": " + str(tone['score']) + "\n")
 
-    return ""
+    return "Created tone analysis."
 
 
 print(analyze(file))

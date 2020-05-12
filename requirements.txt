@@ -5,6 +5,7 @@ click==7.1.2
 colorama==0.4.3
 Flask==1.1.2
 googletrans==2.4.0
+gunicorn==20.0.4
 ibm-cloud-sdk-core==1.5.1
 ibm-watson==4.4.1
 idna==2.9
