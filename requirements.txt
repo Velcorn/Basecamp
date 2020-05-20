@@ -9,7 +9,7 @@ cryptography==2.9.2
 Flask==1.1.2
 googletrans==2.4.0
 gunicorn==20.0.4
-ibm-cloud-sdk-core==1.5.1
+ibm-cloud-sdk-core==2.0.1
 ibm-watson==4.4.1
 idna==2.9
 isort==4.3.21
@@ -28,8 +28,8 @@ python-dateutil==2.8.1
 requests==2.23.0
 six==1.14.0
 sshtunnel==0.1.5
-style==1.1.0
-toml==0.10.0
+style==1.1.6
+toml==0.10.1
 update==0.0.1
 urllib3==1.25.9
 websocket-client==0.48.0
