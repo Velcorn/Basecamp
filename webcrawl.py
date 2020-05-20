@@ -1,27 +1,21 @@
 import psycopg2
 from sshtunnel import SSHTunnelForwarder
+from config import config
 
 try:
     with SSHTunnelForwarder(
             ("rzssh1.informatik.uni-hamburg.de", 22),
             ssh_username="6willrut",
             ssh_password="7TuB8binGL",
-            ssh_private_key="/ssh_key",
             remote_bind_address=("basecamp-bigdata.informatik.uni-hamburg.de", 5432)) as tunnel:
 
         tunnel.start()
-        print("Tunnel connected.")
+        print("SSH tunnel connected.")
 
-        params = {
-            "database": "webcrawl",
-            "host": "basecamp-bigdata.informatik.uni-hamburg.de",
-            "port": 5432,
-            "user": "webcrawl2020",
-            "password": "BcN#DvUAgp"
-        }
-
+        params = config()
         connection = psycopg2.connect(**params)
         cursor = connection.cursor()
+        print("Connected to DB.")
         # Print PostgreSQL Connection properties
         print(connection.get_dsn_parameters(), "\n")
 
