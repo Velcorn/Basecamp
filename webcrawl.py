@@ -1,16 +1,21 @@
-import psycopg2
-import paramiko
 import os
+from psycopg2 import connect, Error
+from paramiko import SSHClient
 from config import config
 
-ssh = paramiko.SSHClient()
+with open("ssh_config.txt", "r") as f:
+    lines = f.readlines()
+    username = lines[0].strip()
+    password = lines[1].strip()
+
+ssh = SSHClient()
 ssh.load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
-ssh.connect("rzssh1.informatik.uni-hamburg.de", username="6willrut", password="7TuB8binGL")
+ssh.connect("rzssh1.informatik.uni-hamburg.de", username=username, password=password)
 print("SSH connected.")
 
 try:
     params = config()
-    conn = psycopg2.connect(**params)
+    conn = connect(**params)
     cursor = conn.cursor()
     print("Connected to DB.")
     # Print PostgreSQL connection properties.
@@ -21,7 +26,7 @@ try:
     record = cursor.fetchone()
     print("You are connected to - ", record, "\n")
 
-except (Exception, psycopg2.Error) as error:
+except (Exception, Error) as error:
     print("Error while connecting to PostgreSQL", error)
 '''finally:
     if conn:
