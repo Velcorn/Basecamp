@@ -1,10 +1,10 @@
 Comment: 
-Wahrscheinlich stellt sich am Schluß heraus daß das Virus "vom Mond gefallen ist". Und die Chinesen sind die Besten, sie haben ohne Vorwissen offensichtlich gleich gewußt was da kommt und deshalb Millionenstädte abgeriegelt und dann auch noch gleich der überraschten Weltgemeinschaft die Genom-Karte zum Virus gereicht, in Rekordzeit fast wie schon vorhanden. Wie wunderbar. 
+Wahrscheinlich stellt sich am Schluß heraus daß das Virus vom Mond gefallen ist. Und die Chinesen sind die Besten, sie haben ohne Vorwissen offensichtlich gleich gewußt was da kommt und deshalb Millionenstädte abgeriegelt und dann auch noch gleich der überraschten Weltgemeinschaft die Genom-Karte zum Virus gereicht, in Rekordzeit fast wie schon vorhanden. Wie wunderbar. 
 
 Translation: 
-Probably turns out at the end that the virus "has fallen from the moon." And the Chinese are the best, they knew obviously equal without the knowledge what is coming and therefore sealed off millions of cities and then the surprised world community passed yet equal to the genome map for virus in record time almost already present. How wonderful.
+Probably turns out at the end that the virus has fallen from the moon. And the Chinese are the best, they knew obviously equal without the knowledge what is coming and therefore sealed off millions of cities and then the surprised world community passed yet equal to the genome map for virus in record time almost already present. How wonderful.
 
 Tone:
 Joy: 0.804355
-Analytical: 0.86147
 Tentative: 0.564885
+Analytical: 0.86147
