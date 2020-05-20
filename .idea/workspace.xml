@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/webcrawl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Basecamp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Basecamp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pylint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pylint.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/comment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/comment.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirement.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tone_analysis.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tone_analysis.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webcrawl.py" beforeDir="false" afterPath="$PROJECT_DIR$/webcrawl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +35,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.leinardi.pycharm.pylint.PylintConfigurable" />
   </component>
   <component name="RunManager" selected="Python.webcrawl">
     <configuration name="flask_app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -173,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589307222481</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Postgres try #1">
+      <created>1589991308100</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1589991308100</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -181,53 +184,57 @@
     <MESSAGE value="Remove tone_analysis.txt for testing purposes" />
     <MESSAGE value="Procfile" />
     <MESSAGE value="Minor text files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor text files" />
+    <MESSAGE value="Postgres try #1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Postgres try #1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589286537473">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
-    <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1589307222206">
+    <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1589991307759">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991307759" />
     <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307222206" />
-    <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1589307186557">
+    <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1589991332476">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="421" y="81" key="FileChooserDialogImpl/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991332476" />
     <state x="421" y="81" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307186557" />
-    <state width="1259" height="148" key="GridCell.Tab.0.bottom" timestamp="1589991259623">
+    <state width="1259" height="148" key="GridCell.Tab.0.bottom" timestamp="1589991432424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
-    <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991259623" />
+    <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1259" height="148" key="GridCell.Tab.0.center" timestamp="1589991259622">
+    <state width="1259" height="148" key="GridCell.Tab.0.center" timestamp="1589991432424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
-    <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991259622" />
+    <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1259" height="148" key="GridCell.Tab.0.left" timestamp="1589991259622">
+    <state width="1259" height="148" key="GridCell.Tab.0.left" timestamp="1589991432424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
-    <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991259622" />
+    <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1259" height="148" key="GridCell.Tab.0.right" timestamp="1589991259623">
+    <state width="1259" height="148" key="GridCell.Tab.0.right" timestamp="1589991432424">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
-    <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991259623" />
+    <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state x="155" y="0" key="SettingsEditor" timestamp="1589989563853">
+    <state x="155" y="0" key="SettingsEditor" timestamp="1589991335528">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589989563853" />
+    <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991335528" />
     <state x="155" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307188437" />
-    <state x="233" y="69" key="Vcs.Push.Dialog.v2" timestamp="1589307223605">
+    <state x="233" y="69" key="Vcs.Push.Dialog.v2" timestamp="1589991309174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991309174" />
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307223605" />
   </component>
 </project>

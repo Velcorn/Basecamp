@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="PylintConfigService">
-    <option name="customPylintPath" value="E:\Drive\Uni\Semester 6\Basecamp\Flask\venv\Scripts\pylint.exe" />
+    <option name="customPylintPath" value="E:\Documents\Programming\Basecamp\venv\Scripts\pylint.exe" />
   </component>
 </project>

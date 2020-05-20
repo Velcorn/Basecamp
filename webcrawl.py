@@ -7,17 +7,17 @@ try:
             ssh_username="6willrut",
             ssh_password="7TuB8binGL",
             ssh_private_key="/ssh_key",
-            remote_bind_address=("basecamp-bigdata.informatik.uni-hamburg.de", 5432)) as server:
+            remote_bind_address=("basecamp-bigdata.informatik.uni-hamburg.de", 5432)) as tunnel:
 
-        server.start()
-        print("Server connected.")
+        tunnel.start()
+        print("Tunnel connected.")
 
         params = {
-            "user": "webcrawl2020",
-            "password": "BcN#DvUAgp",
+            "database": "webcrawl",
             "host": "basecamp-bigdata.informatik.uni-hamburg.de",
             "port": 5432,
-            "database": "webcrawl"
+            "user": "webcrawl2020",
+            "password": "BcN#DvUAgp"
         }
 
         connection = psycopg2.connect(**params)
