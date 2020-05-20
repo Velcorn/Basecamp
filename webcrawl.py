@@ -17,7 +17,7 @@ try:
     params = config()
     conn = connect(**params)
     cursor = conn.cursor()
-    print("Connected to DB.")
+    print("DB connected.")
     # Print PostgreSQL connection properties.
     print(conn.get_dsn_parameters(), "\n")
 
