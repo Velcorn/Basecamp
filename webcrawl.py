@@ -19,20 +19,20 @@ try:
             as tunnel:
 
         tunnel.start()
-        print("SSH connected.")
+        print("SSH connected.", "\n")
 
         params = config()
-        conn = connect(**params)
-        cursor = conn.cursor()
-        print("DB connected.")
+        connection = connect(**params)
+        cursor = connection.cursor()
+        print("DB connected.", "\n")
 
-        print(conn.get_dsn_parameters(), "\n")
+        print(connection.get_dsn_parameters(), "\n")
         cursor.execute("SELECT version();")
         record = cursor.fetchone()
         print("You are connected to - ", record, "\n")
 
         cursor.close()
-        conn.close()
+        connection.close()
         tunnel.close()
         print("DB disconnected.")
 except (Exception, Error) as error:
