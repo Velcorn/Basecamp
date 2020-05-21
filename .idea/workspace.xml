@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.ini" beforeDir="false" afterPath="$PROJECT_DIR$/database.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webcrawl.py" beforeDir="false" afterPath="$PROJECT_DIR$/webcrawl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webcrawl2.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +34,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Python.webcrawl">
     <configuration name="flask_app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -266,10 +263,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fuck this..." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="800" y="319" width="309" height="376" key="#Notifications" timestamp="1590054692200">
+    <state x="800" y="319" width="309" height="376" key="#Notifications" timestamp="1590094809083">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
-    <state x="800" y="319" width="309" height="376" key="#Notifications/0.0.1920.1016@0.0.1920.1016" timestamp="1590054692200" />
+    <state x="800" y="319" width="309" height="376" key="#Notifications/0.0.1920.1016@0.0.1920.1016" timestamp="1590094809083" />
     <state x="109" y="289" width="732" height="435" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590016929061">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
@@ -321,12 +318,12 @@
     <state width="1244" height="148" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
     <state width="946" height="250" key="GridCell.Tab.0.right/0.0.1920.1016@0.0.1920.1016" timestamp="1590093999971" />
     <state width="1892" height="250" key="GridCell.Tab.0.right/0.0.3840.1016@0.0.3840.1016" timestamp="1590093556064" />
-    <state x="233" y="0" key="SettingsEditor" timestamp="1590010735956">
+    <state x="233" y="0" key="SettingsEditor" timestamp="1590094644982">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991335528" />
     <state x="155" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307188437" />
-    <state x="233" y="0" key="SettingsEditor/0.0.1920.1016@0.0.1920.1016" timestamp="1590010735956" />
+    <state x="233" y="0" key="SettingsEditor/0.0.1920.1016@0.0.1920.1016" timestamp="1590094644982" />
     <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1590060838645">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
