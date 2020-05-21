@@ -5,15 +5,17 @@ from config import config
 
 with open("ssh_config.txt", "r") as f:
     lines = f.readlines()
-    username = lines[0].strip()
-    password = lines[1].strip()
+    hostname = lines[0].strip()
+    username = lines[1].strip()
+    password = lines[2].strip()
 
 ssh = SSHClient()
 ssh.load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
-ssh.connect("rzssh1.informatik.uni-hamburg.de", username=username, password=password)
+ssh.connect(hostname=hostname, username=username, password=password)
 print("SSH connected.")
 
 try:
+
     params = config()
     conn = connect(**params)
     cursor = conn.cursor()
