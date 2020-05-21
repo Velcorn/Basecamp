@@ -19,6 +19,7 @@ try:
         tunnel.start()
         print("SSH connected.")
 
+        lport = tunnel.local_bind_port
         params = config()
         conn = connect(**params)
         cursor = conn.cursor()
