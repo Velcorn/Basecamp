@@ -1,6 +1,5 @@
-import os
 from psycopg2 import connect, Error
-from paramiko import SSHClient
+from sshtunnel import SSHTunnelForwarder
 from config import config
 
 with open("ssh_config.txt", "r") as f:
@@ -8,30 +7,34 @@ with open("ssh_config.txt", "r") as f:
     hostname = lines[0].strip()
     username = lines[1].strip()
     password = lines[2].strip()
-
-ssh = SSHClient()
-ssh.load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
-ssh.connect(hostname=hostname, username=username, password=password)
-print("SSH connected.")
+    remote_bind_address = lines[3].strip()
 
 try:
+    with SSHTunnelForwarder(
+        (hostname, 22),
+        ssh_username=username,
+        ssh_password=password,
+        remote_bind_address=(remote_bind_address, 5432),
+        local_bind_address=("localhost", 8080)) \
+            as tunnel:
 
-    params = config()
-    conn = connect(**params)
-    cursor = conn.cursor()
-    print("DB connected.")
-    # Print PostgreSQL connection properties.
-    print(conn.get_dsn_parameters(), "\n")
+        tunnel.start()
+        print("SSH connected.")
 
-    # Print PostgreSQL version.
-    cursor.execute("SELECT version();")
-    record = cursor.fetchone()
-    print("You are connected to - ", record, "\n")
+        params = config()
+        conn = connect(**params)
+        cursor = conn.cursor()
+        print("DB connected.")
+        # Print PostgreSQL connection properties.
+        print(conn.get_dsn_parameters(), "\n")
 
-except (Exception, Error) as error:
-    print("Error while connecting to PostgreSQL", error)
-'''finally:
-    if conn:
+        # Print PostgreSQL version.
+        cursor.execute("SELECT version();")
+        record = cursor.fetchone()
+        print("You are connected to - ", record, "\n")
         cursor.close()
         conn.close()
-        print("PostgreSQL connection is closed.")'''
+        tunnel.close()
+        print("DB disconnected.")
+except (Exception, Error) as error:
+    print("Error while connecting to DB", error)
