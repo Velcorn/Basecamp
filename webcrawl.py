@@ -25,10 +25,7 @@ try:
         conn = connect(**params)
         cursor = conn.cursor()
         print("DB connected.")
-        # Print PostgreSQL connection properties.
         print(conn.get_dsn_parameters(), "\n")
-
-        # Print PostgreSQL version.
         cursor.execute("SELECT version();")
         record = cursor.fetchone()
         print("You are connected to - ", record, "\n")
