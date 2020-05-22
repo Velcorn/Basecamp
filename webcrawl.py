@@ -2,38 +2,44 @@ from psycopg2 import connect, Error
 from sshtunnel import SSHTunnelForwarder
 from config import config
 
-with open("ssh_config.txt", "r") as f:
-    lines = f.readlines()
-    hostname = lines[0].strip()
-    username = lines[1].strip()
-    password = lines[2].strip()
-    remote_bind_address = lines[3].strip()
 
-try:
-    with SSHTunnelForwarder(
-        (hostname, 22),
-        ssh_username=username,
-        ssh_password=password,
-        remote_bind_address=(remote_bind_address, 5432),
-        local_bind_address=("localhost", 8080)) \
-            as tunnel:
+def fetch_comments():
+    with open("ssh_config.txt", "r") as f:
+        lines = f.readlines()
+        hostname = lines[0].strip()
+        username = lines[1].strip()
+        password = lines[2].strip()
+        remote_bind_address = lines[3].strip()
 
-        tunnel.start()
-        print("SSH connected.", "\n")
+    try:
+        with SSHTunnelForwarder(
+            (hostname, 22),
+            ssh_username=username,
+            ssh_password=password,
+            remote_bind_address=(remote_bind_address, 5432),
+            local_bind_address=("localhost", 8080)) \
+                as tunnel:
 
-        params = config()
-        connection = connect(**params)
-        cursor = connection.cursor()
-        print("DB connected.", "\n")
+            tunnel.start()
+            print("SSH connected.", "\n")
 
-        print(connection.get_dsn_parameters(), "\n")
-        cursor.execute("SELECT version();")
-        record = cursor.fetchone()
-        print("You are connected to - ", record, "\n")
+            params = config()
+            connection = connect(**params)
+            cursor = connection.cursor()
+            print("DB connected.", "\n")
 
-        cursor.close()
-        connection.close()
-        tunnel.close()
-        print("DB disconnected.")
-except (Exception, Error) as error:
-    print("Error while connecting to DB", error)
+            print("Fetching comments...")
+            cursor.execute("SELECT text "
+                           "FROM public.comments "
+                           "WHERE doc_id=1 and parent_comment_id IS NULL "
+                           "ORDER BY id ASC;")
+            comments = cursor.fetchmany(10)
+
+            # Close everything
+            cursor.close()
+            connection.close()
+            print("\n" + "DB disconnected." + "\n")
+
+            return comments
+    except (Exception, Error) as error:
+        print("Error while connecting to DB", error)

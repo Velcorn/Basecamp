@@ -1,10 +1,94 @@
 Comment: 
-Wahrscheinlich stellt sich am Schluß heraus daß das Virus vom Mond gefallen ist. Und die Chinesen sind die Besten, sie haben ohne Vorwissen offensichtlich gleich gewußt was da kommt und deshalb Millionenstädte abgeriegelt und dann auch noch gleich der überraschten Weltgemeinschaft die Genom-Karte zum Virus gereicht, in Rekordzeit fast wie schon vorhanden. Wie wunderbar. 
+Der Reichtum Weltweit ist halt so groß dass sich besondere Dinge völlig vom realen Wert entfernen. Letztlich ist es das hoffen auf Wertsteigerung. Dass wird auch weiter so gut gehen solange es viel ungebrauchtren Reichtum gibt. 
 
 Translation: 
-Probably turns out at the end that the virus has fallen from the moon. And the Chinese are the best, they knew obviously equal without the knowledge what is coming and therefore sealed off millions of cities and then the surprised world community passed yet equal to the genome map for virus in record time almost already present. How wonderful.
+The wealth of the world is just as great, particular things that completely remove from the real value. Ultimately, it is the hope of capital appreciation. That will go on so long as there is a lot ungebrauchtren wealth.
 
 Tone:
-Joy: 0.804355
-Tentative: 0.564885
-Analytical: 0.86147
+Joy: 0.74928
+Analytical: 0.903127
+Tentative: 0.695677
+
+Comment: 
+Was soll denn dieser Quatsch? Diese und nochbessere BB-Schuhe kann man sich jederzeit injedem ordentlichen Sportfachgeschäft zum angemessenen Preis kaufen. Auch dem ideellenWert aus der Ersteigerung kann ich nichtssinnvolles oder gar humanes abgewinnen.
+
+Translation: 
+What is to this nonsense? These and even better BB shoes you can buy at a reasonable price at any time in each ordinary sports shop. Even the ideellenWert from the bidding, I can not meaningful or human abgewinnen do.
+
+Tone:
+Analytical: 0.596122
+Tentative: 0.978371
+
+Comment: 
+Hat die Schuhe Herr Jordan selbst getragen, oder sind das irgendwelche Jodan1? Das kommt in dem Artikel in meinen Augen nicht zum Vorschein.
+
+Translation: 
+Has taken even the shoes Mr. Jordan, or are they any Jodan1? This does not come to light in an article in my eyes.
+
+Tone:
+Tentative: 0.987926
+
+Comment: 
+Stolzer Preis für gebrauchte Turnschuhe.
+
+Translation: 
+Steep price for used sneakers.
+
+Tone:
+
+Comment: 
+Obszön! Millionen Menschen stehen finanziell mit dem Rücken an der Wand, so viele verlieren ihren Job und wissen nicht, wie sie ihre Familie durchbringen sollen. Und es gibt solche, die eine halbe Million für ein paar alte Latschen ausgeben können und wollen! Wahnsinn!
+
+Translation: 
+Obscene! Million people stand financially with their backs to the wall, so many lose their jobs and do not know how they are to bring their family. And there are those who can spend half a million to a couple of old slippers and want! Madness!
+
+Tone:
+
+Comment: 
+Also ich würde mir auch eher ein paar Turnschuhe als ein Haus für den gleichen Preis kaufen. Nimmt weniger Platz weg. Und pflegen muss man sie auch nicht, weil ja gewollt ausgelatscht. Cleverer Bursche ;) so, jetzt geh ich meinen Soforthilfeantrag ausfüllen.
+
+Translation: 
+So I would rather buy me some sneakers as a home for the same price. Takes up less space. And one does not care for it too, because yes ausgelatscht wanted. Clever fellow;) so now I go my fill emergency aid request.
+
+Tone:
+Tentative: 0.706892
+
+Comment: 
+Einfach nur eklig! Geld für Fußschweiß! wie verrückt kann man sein!???
+
+Translation: 
+Just disgusting! Money for foot sweat! how crazy can you be! ???
+
+Tone:
+Tentative: 0.972662
+
+Comment: 
+Mit oder ohne Schnürsenkel?
+
+Translation: 
+With or without laces?
+
+Tone:
+Tentative: 0.984352
+
+Comment: 
+Wer bekommt das Geld? Michael Jordan? Oder wird es für einen wohltätigen Zweck gespendet? Wie auch immer das Auktionshaus verdient immer. Geld verdirbt doch den Charachter! 
+
+Translation: 
+Who gets the money? Michael Jordan? Or it will be donated to a charitable cause? Anyway, the auction house always deserved. Money ruins but the Charachter!
+
+Tone:
+Anger: 0.523685
+
+Comment: 
+Das ganze zeigt nur das unser System kaputt ist. Reichtum müsste gedeckelt werden. Wenn jemand 10 MRD hat, lebt dieser anders als jemand mit 30 MRD hat?  Wohl kaum, da geht es nur noch um die übertrumpfen unter den Superreichen. Wer hat die größere Insel und die größte Jacht, wobei diese wieder mit immensen Unterhaltungsaufwand verbunden sind und sich noch kritischer ist es das sich einige wie Superhelden auf Ideen kommen wie sie die Welt retten wollen, wie z.B. mit Impfwohltaten die mehr als fragwürdig sind. Der Staat bzw. die Politiker  sollten Staatsaufgaben nicht den superreichen übertragen, hätte etwas bestechlichen Beigeschmack, wobei es nicht außergewöhnlich ist für manchen dieser Zunft.  
+
+Translation: 
+The whole shows only that our system is broken. Wealth would have to be capped. If someone has 10 billion, these different lives than someone with 30 billion has? Probably not, because it's all about the trump among the super-rich. Who has the greater island and the largest yacht, which will be reconnected with huge maintenance costs and even more critical it is that some such superheroes as they want to save the world on ideas such as with Impfwohltaten are more than questionable. The state and the politicians should not state functions transferred to the super-rich, had something corrupt taste, and it is not unusual for some of these craft.
+
+Tone:
+Joy: 0.659043
+Sadness: 0.569177
+Analytical: 0.853223
+Tentative: 0.87727
+
