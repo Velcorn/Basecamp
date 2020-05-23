@@ -6,14 +6,14 @@ click==7.1.2
 cryptography==2.9.2
 Flask==1.1.2
 googletrans==2.4.0
-ibm-cloud-sdk-core==1.5.1
+heroku==0.1.4
+ibm-cloud-sdk-core==2.0.4
 ibm-watson==4.4.1
 idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
 paramiko==2.7.1
-pkg-resources==0.0.0
 psycopg2==2.8.5
 pycparser==2.20
 PyJWT==1.7.1
