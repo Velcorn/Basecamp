@@ -7,12 +7,11 @@ def fetch_comments():
     config = sshconfig()
     try:
         with SSHTunnelForwarder(
-            (config["host"], 22),
-            ssh_username=config["user"],
-            ssh_password=config["password"],
-            remote_bind_address=(config["rba"], 5432),
-            local_bind_address=("localhost", 8080)) \
-                as tunnel:
+                (config["host"], 22),
+                ssh_username=config["user"],
+                ssh_password=config["password"],
+                remote_bind_address=(config["rba"], 5432),
+                local_bind_address=("localhost", 8080)) as tunnel:
 
             tunnel.start()
             print("SSH connected.", "\n")
@@ -25,7 +24,7 @@ def fetch_comments():
             print("Fetching comments...")
             cursor.execute("SELECT text "
                            "FROM public.comments "
-                           "WHERE doc_id=1 and parent_comment_id IS NULL "
+                           "WHERE doc_id=1 and parent_comment_id IS NULL"
                            "ORDER BY id ASC;")
             comments = cursor.fetchmany(10)
 
