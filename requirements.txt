@@ -6,7 +6,7 @@ click==7.1.2
 cryptography==2.9.2
 Flask==1.1.2
 googletrans==2.4.0
-heroku==0.1.4
+gunicorn==20.0.4
 ibm-cloud-sdk-core==2.0.4
 ibm-watson==4.4.1
 idna==2.9
