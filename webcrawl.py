@@ -1,29 +1,23 @@
 from psycopg2 import connect, Error
 from sshtunnel import SSHTunnelForwarder
-from config import config
+from config import dbconfig, sshconfig
 
 
 def fetch_comments():
-    with open("ssh_config.txt", "r") as f:
-        lines = f.readlines()
-        hostname = lines[0].strip()
-        username = lines[1].strip()
-        password = lines[2].strip()
-        remote_bind_address = lines[3].strip()
-
+    config = sshconfig()
     try:
         with SSHTunnelForwarder(
-            (hostname, 22),
-            ssh_username=username,
-            ssh_password=password,
-            remote_bind_address=(remote_bind_address, 5432),
+            (config["host"], 22),
+            ssh_username=config["user"],
+            ssh_password=config["password"],
+            remote_bind_address=(config["rba"], 5432),
             local_bind_address=("localhost", 8080)) \
                 as tunnel:
 
             tunnel.start()
             print("SSH connected.", "\n")
 
-            params = config()
+            params = dbconfig()
             connection = connect(**params)
             cursor = connection.cursor()
             print("DB connected.", "\n")
@@ -42,4 +36,4 @@ def fetch_comments():
 
             return comments
     except (Exception, Error) as error:
-        print("Error while connecting to DB", error)
+        print("Error while connecting to DB:", error)
