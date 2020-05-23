@@ -3,7 +3,7 @@ from ibm_watson import LanguageTranslatorV3
 from ibm_watson import ToneAnalyzerV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from googletrans import Translator
-from webcrawl import fetch_comments
+from analysis import fetch_comments
 
 # Set up Tone Analyzer and Translator from Watson
 api_key_tl = '2Q5-kJJN8MqVEgGxf5VM2Dv063cL7r5VTp44IcreG3EN'
@@ -31,7 +31,7 @@ tone_analyzer.set_service_url(url_ta)
 googletrans = Translator()
 
 
-# Analyze the tone of the input text.
+# Analyze the tone of comments from the DB.
 def analyze():
     # Remove analysis if already present.
     if os.path.exists("tone_analysis.txt"):
