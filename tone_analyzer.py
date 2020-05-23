@@ -50,11 +50,11 @@ def analyze():
 
         with open("tone_analysis.txt", "a", encoding="utf8") as f:
             f.write("Comment: " + "\n" + comment + "\n"*2)
-            f.write("Translation: " + "\n" + translation + "\n" * 2)
+            f.write("Translation: " + "\n" + translation + "\n"*2)
             f.write("Tone:" + "\n")
             for tone in tone_analysis['document_tone']['tones']:
                 f.write(tone['tone_name'] + ": " + str(tone['score']) + "\n")
-            f.write("\n")
+            f.write("\n"*2)
 
     return "Created tone analysis."
 
