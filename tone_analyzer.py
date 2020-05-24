@@ -1,9 +1,9 @@
-import os
 from ibm_watson import LanguageTranslatorV3
 from ibm_watson import ToneAnalyzerV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from googletrans import Translator
-from analysis import fetch_comments
+from psycopg2 import connect, Error
+from config import dbconfig
 
 # Set up Tone Analyzer and Translator from Watson
 api_key_tl = '2Q5-kJJN8MqVEgGxf5VM2Dv063cL7r5VTp44IcreG3EN'
@@ -31,32 +31,68 @@ tone_analyzer.set_service_url(url_ta)
 googletrans = Translator()
 
 
+def fetch_comments():
+    try:
+        params = dbconfig()
+        connection = connect(**params)
+        cursor = connection.cursor()
+        print("DB connected.")
+
+        print("Fetching comments...")
+        cursor.execute("SELECT text FROM comments WHERE translation is NULL ORDER BY id ASC;")
+        comments = cursor.fetchmany(10)
+
+        # Close everything
+        cursor.close()
+        connection.close()
+        print("DB disconnected.")
+
+        return comments
+    except (Exception, Error) as error:
+        return error
+
+
 # Analyze the tone of comments from the DB.
 def analyze():
-    # Remove analysis if already present.
-    if os.path.exists("tone_analysis.txt"):
-        os.remove("tone_analysis.txt")
-
     # Get comments from the DB.
     comments = fetch_comments()
 
-    # Create tone analysis for each comment.
-    for comment in comments:
-        comment = str(comment[0]).replace("\n", " ")
-        # Translate comment and analyze the tone.
-        # translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
-        translation = googletrans.translate(comment).text
-        tone_analysis = tone_analyzer.tone({'text': translation}, content_type='application/json').get_result()
+    try:
+        # Open DB connection.
+        params = dbconfig()
+        connection = connect(**params)
+        cursor = connection.cursor()
+        print("DB connected.")
 
-        with open("tone_analysis.txt", "a", encoding="utf8") as f:
-            f.write("Comment: " + "\n" + comment + "\n"*2)
-            f.write("Translation: " + "\n" + translation + "\n"*2)
-            f.write("Tone:" + "\n")
+        print("Writing entries to DB...")
+        # Translate each comment and generate tone analysis.
+        for comment in comments:
+            comment = str(comment[0]).replace("\n", " ")
+            # Translate comment and analyze the tone.
+            # translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
+            translation = googletrans.translate(comment).text
+            tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
+            analysis = []
             for tone in tone_analysis['document_tone']['tones']:
-                f.write(tone['tone_name'] + ": " + str(tone['score']) + "\n")
-            f.write("\n"*2)
+                analysis.append(tone['tone_name'] + ": " + str(tone['score']))
 
-    return "Created tone analysis."
+            # Write translation and analysis to DB.
+            cursor.execute("update comments "
+                           "set translation=(%s) "
+                           "where id=(select id from comments where translation is null order by id asc limit 1);",
+                           (translation,))
+
+            cursor.execute("update comments "
+                           "set tone=(%s) "
+                           "where id=(select id from comments where tone is null order by id asc limit 1);",
+                           (analysis,))
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+        return "Committed entries to DB."
+    except (Exception, Error) as error:
+        return error
 
 
 print(analyze())
