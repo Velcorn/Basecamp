@@ -3,7 +3,7 @@ from ibm_watson import ToneAnalyzerV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from googletrans import Translator
 from psycopg2 import connect, Error
-from config import dbconfig
+from config import db_target
 
 # Set up Tone Analyzer and Translator from Watson
 api_key_tl = '2Q5-kJJN8MqVEgGxf5VM2Dv063cL7r5VTp44IcreG3EN'
@@ -33,14 +33,17 @@ googletrans = Translator()
 
 def fetch_comments():
     try:
-        params = dbconfig()
+        params = db_target()
         connection = connect(**params)
         cursor = connection.cursor()
         print("DB connected.")
 
         print("Fetching comments...")
-        cursor.execute("SELECT text FROM comments WHERE translation is NULL ORDER BY id ASC;")
-        comments = cursor.fetchmany(10)
+        cursor.execute("SELECT text "
+                       "FROM comments "
+                       "WHERE translation IS NULL "
+                       "ORDER BY id ASC;")
+        comments = cursor.fetchall()
 
         # Close everything
         cursor.close()
@@ -59,12 +62,12 @@ def analyze():
 
     try:
         # Open DB connection.
-        params = dbconfig()
+        params = db_target()
         connection = connect(**params)
         cursor = connection.cursor()
         print("DB connected.")
 
-        print("Writing entries to DB...")
+        print("Generating analysis and writing results to DB...")
         # Translate each comment and generate tone analysis.
         for comment in comments:
             comment = str(comment[0]).replace("\n", " ")
@@ -77,19 +80,21 @@ def analyze():
                 analysis.append(tone['tone_name'] + ": " + str(tone['score']))
 
             # Write translation and analysis to DB.
-            cursor.execute("update comments "
-                           "set translation=(%s) "
-                           "where id=(select id from comments where translation is null order by id asc limit 1);",
-                           (translation,))
+            cursor.execute("UPDATE comments "
+                           "SET translation=(%s) "
+                           "WHERE id=(SELECT id FROM comments WHERE translation IS NULL ORDER BY id ASC LIMIT 1);",
+                           (translation, ))
 
-            cursor.execute("update comments "
-                           "set tone=(%s) "
-                           "where id=(select id from comments where tone is null order by id asc limit 1);",
-                           (analysis,))
-
+            cursor.execute("UPDATE comments "
+                           "SET tone=(%s) "
+                           "WHERE id=(SELECT id FROM comments WHERE tone IS NULL ORDER BY id ASC LIMIT 1);",
+                           (analysis, ))
         connection.commit()
+
+        # Close everything
         cursor.close()
         connection.close()
+        print("DB disconnected.")
         return "Committed entries to DB."
     except (Exception, Error) as error:
         return error
