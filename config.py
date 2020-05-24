@@ -1,7 +1,17 @@
 from configparser import ConfigParser
 
 
-def dbconfig(filename="database.ini", section="postgresql"):
+def sshconfig(filename="ssh.ini", section="ssh"):
+    parser = ConfigParser()
+    parser.read(filename)
+    ssh = {}
+    params = parser.items(section)
+    for param in params:
+        ssh[param[0]] = param[1]
+    return ssh
+
+
+def db_origin(filename="db_origin.ini", section="postgresql"):
     parser = ConfigParser()
     parser.read(filename)
     db = {}
@@ -11,11 +21,11 @@ def dbconfig(filename="database.ini", section="postgresql"):
     return db
 
 
-def sshconfig(filename="ssh.ini", section="ssh"):
+def db_target(filename="db_target.ini", section="postgresql"):
     parser = ConfigParser()
     parser.read(filename)
-    ssh = {}
+    db = {}
     params = parser.items(section)
     for param in params:
-        ssh[param[0]] = param[1]
-    return ssh
+        db[param[0]] = param[1]
+    return db
