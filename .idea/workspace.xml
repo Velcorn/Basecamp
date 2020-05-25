@@ -1,25 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="" />
+    <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="Some fixes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_transfer.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_transfer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tone_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tone_analyzer.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,11 +20,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="4d616ec461a3aae5ab2cc7b44e1042811f4867f0" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1bo71AQa75xRexvD6dL08gN2zKA" />
@@ -54,57 +36,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.leinardi.pycharm.pylint.PylintConfigurable" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Python.tone_analyzer">
-    <configuration name="analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Basecamp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/analysis.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="db_transfer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Basecamp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db_transfer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.webcrawl">
     <configuration name="flask_app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Basecamp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,7 +60,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tone_analyzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="watson_tone_analyzer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Basecamp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -138,7 +72,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tone_analyzer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/watson_tone_analyzer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -147,7 +81,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="webcrawl2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="webcrawl" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Basecamp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -159,7 +93,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webcrawl2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webcrawl.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -170,11 +104,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.tone_analyzer" />
-        <item itemvalue="Python.db_transfer" />
-        <item itemvalue="Python.analysis" />
+        <item itemvalue="Python.webcrawl" />
+        <item itemvalue="Python.watson_tone_analyzer" />
         <item itemvalue="Python.flask_app" />
-        <item itemvalue="Python.webcrawl2" />
       </list>
     </recent_temporary>
   </component>
@@ -245,251 +177,8 @@
       <option name="project" value="LOCAL" />
       <updated>1589991308100</updated>
     </task>
-    <task id="LOCAL-00009" summary="Database.ini">
-      <created>1590013119433</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1590013119433</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Fuck SSH!">
-      <created>1590016452769</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1590016452769</updated>
-    </task>
-    <task id="LOCAL-00011" summary="SSH connects, DB doesn't...">
-      <created>1590018039055</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1590018039055</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Minor text fixes.">
-      <created>1590018090055</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1590018090055</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Minor text fixes.">
-      <created>1590018205202</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1590018205202</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Fuck this...">
-      <created>1590060115459</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1590060115459</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Fuck this...">
-      <created>1590060836489</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1590060836489</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Minor text fixes?!">
-      <created>1590094941734</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1590094941734</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Minor text fixes?!">
-      <created>1590095046182</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1590095046182</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Minor text fixes?!">
-      <created>1590095103369</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1590095103369</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Removed database.ini from git">
-      <created>1590095301582</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1590095301582</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Minor text fixes :P">
-      <created>1590096018468</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1590096018468</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Minor text fixes :P">
-      <created>1590096052324</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1590096052324</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Minor text fixes :P">
-      <created>1590096829457</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1590096829457</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Minor text fixes.">
-      <created>1590097022502</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1590097022502</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Get comments from DB and analyze all of them at once.">
-      <created>1590158636102</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1590158636102</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Minor text fixes.">
-      <created>1590238613877</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1590238613877</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Minor text fixes.">
-      <created>1590238802128</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1590238802128</updated>
-    </task>
-    <task id="LOCAL-00027" summary="ssh.ini">
-      <created>1590241649663</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1590241649663</updated>
-    </task>
-    <task id="LOCAL-00028" summary="ssh.ini">
-      <created>1590241707769</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1590241707769</updated>
-    </task>
-    <task id="LOCAL-00029" summary="slugignore">
-      <created>1590242269865</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1590242269865</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Fixed requirements...">
-      <created>1590242473483</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1590242473483</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Fixed requirements... again :P">
-      <created>1590242711209</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1590242711209</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Fixed requirements... again :P">
-      <created>1590252964979</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1590252964979</updated>
-    </task>
-    <task id="LOCAL-00033" summary="SQL queries, analysis db">
-      <created>1590273841280</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1590273841280</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Stuff actually works :)">
-      <created>1590284497469</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1590284497469</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Pretty done for today, let's pray for another day...">
-      <created>1590354899369</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1590354899369</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Everything actually works?! Some issue with comments/text...">
-      <created>1590364494408</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1590364494408</updated>
-    </task>
-    <option name="localTasksCounter" value="37" />
+    <option name="localTasksCounter" value="9" />
     <servers />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="1">
-          <value>
-            <State>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="HEAD" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="roots">
-                    <value>
-                      <list>
-                        <option value="$PROJECT_DIR$" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="1" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="venv in gitignore" />
@@ -497,123 +186,58 @@
     <MESSAGE value="Procfile" />
     <MESSAGE value="Minor text files" />
     <MESSAGE value="Postgres try #1" />
-    <MESSAGE value="Database.ini" />
-    <MESSAGE value="Fuck SSH!" />
-    <MESSAGE value="SSH connects, DB doesn't..." />
-    <MESSAGE value="Fuck this..." />
-    <MESSAGE value="Minor text fixes?!" />
-    <MESSAGE value="Removed database.ini from git" />
-    <MESSAGE value="Minor text fixes :P" />
-    <MESSAGE value="Get comments from DB and analyze all of them at once." />
-    <MESSAGE value="Minor text fixes." />
-    <MESSAGE value="ssh.ini" />
-    <MESSAGE value="slugignore" />
-    <MESSAGE value="Fixed requirements..." />
-    <MESSAGE value="Fixed requirements... again :P" />
-    <MESSAGE value="SQL queries, analysis db" />
-    <MESSAGE value="Stuff actually works :)" />
-    <MESSAGE value="Pretty done for today, let's pray for another day..." />
-    <MESSAGE value="Everything actually works?! Some issue with comments/text..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Everything actually works?! Some issue with comments/text..." />
+    <MESSAGE value="Some sorting of query results" />
+    <MESSAGE value="Some fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some fixes" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="800" y="319" width="319" height="376" key="#Notifications" timestamp="1590339294217">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state x="800" y="319" width="319" height="376" key="#Notifications/0.0.1920.1016@0.0.1920.1016" timestamp="1590339294217" />
-    <state x="109" y="289" width="724" height="433" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590242228605">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state x="109" y="289" width="724" height="433" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1016@0.0.1920.1016" timestamp="1590242228605" />
-    <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590144468356">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589286537473">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
-    <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590144468356" />
-    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2" timestamp="1590364494336">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1590403716248">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991307759" />
+    <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590403716248" />
     <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307222206" />
-    <state x="444" y="0" key="CommitChangelistDialog2/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590158635932" />
-    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2/0.0.1920.1016@0.0.1920.1016" timestamp="1590364494336" />
-    <state x="100" y="100" width="1710" height="814" key="DiffContextDialog" timestamp="1590283081146">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state x="100" y="100" width="1710" height="814" key="DiffContextDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590283081146" />
     <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1589991332476">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="81" key="FileChooserDialogImpl/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991332476" />
     <state x="421" y="81" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307186557" />
-    <state width="932" height="310" key="GridCell.Tab.0.bottom" timestamp="1590364309112">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state width="1259" height="148" key="GridCell.Tab.0.bottom" timestamp="1589991432424">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1892" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590158593169" />
-    <state width="932" height="310" key="GridCell.Tab.0.bottom/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309112" />
-    <state width="1892" height="250" key="GridCell.Tab.0.bottom/0.0.3840.1016@0.0.3840.1016" timestamp="1590093556065" />
-    <state width="932" height="310" key="GridCell.Tab.0.center" timestamp="1590364309112">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state width="1259" height="148" key="GridCell.Tab.0.center" timestamp="1589991432424">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1892" height="274" key="GridCell.Tab.0.center/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590158593169" />
-    <state width="932" height="310" key="GridCell.Tab.0.center/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309112" />
-    <state width="1892" height="250" key="GridCell.Tab.0.center/0.0.3840.1016@0.0.3840.1016" timestamp="1590093556064" />
-    <state width="932" height="310" key="GridCell.Tab.0.left" timestamp="1590364309112">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state width="1259" height="148" key="GridCell.Tab.0.left" timestamp="1589991432424">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1892" height="274" key="GridCell.Tab.0.left/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590158593169" />
-    <state width="932" height="310" key="GridCell.Tab.0.left/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309112" />
-    <state width="1892" height="250" key="GridCell.Tab.0.left/0.0.3840.1016@0.0.3840.1016" timestamp="1590093556064" />
-    <state width="932" height="310" key="GridCell.Tab.0.right" timestamp="1590364309112">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state width="1259" height="148" key="GridCell.Tab.0.right" timestamp="1589991432424">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991432424" />
     <state width="1244" height="148" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1892" height="274" key="GridCell.Tab.0.right/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590158593169" />
-    <state width="932" height="310" key="GridCell.Tab.0.right/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309112" />
-    <state width="1892" height="250" key="GridCell.Tab.0.right/0.0.3840.1016@0.0.3840.1016" timestamp="1590093556064" />
-    <state width="932" height="310" key="GridCell.Tab.1.bottom" timestamp="1590364309113">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state width="932" height="310" key="GridCell.Tab.1.bottom/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309113" />
-    <state width="932" height="310" key="GridCell.Tab.1.center" timestamp="1590364309113">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state width="932" height="310" key="GridCell.Tab.1.center/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309113" />
-    <state width="932" height="310" key="GridCell.Tab.1.left" timestamp="1590364309113">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state width="932" height="310" key="GridCell.Tab.1.left/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309113" />
-    <state width="932" height="310" key="GridCell.Tab.1.right" timestamp="1590364309113">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state width="932" height="310" key="GridCell.Tab.1.right/0.0.1920.1016@0.0.1920.1016" timestamp="1590364309113" />
-    <state x="233" y="0" key="SettingsEditor" timestamp="1590095875404">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state x="155" y="0" key="SettingsEditor" timestamp="1589991335528">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991335528" />
     <state x="155" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307188437" />
-    <state x="233" y="0" key="SettingsEditor/0.0.1920.1016@0.0.1920.1016" timestamp="1590095875404" />
-    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1590364496167">
-      <screen x="0" y="0" width="1920" height="1016" />
+    <state x="233" y="69" key="Vcs.Push.Dialog.v2" timestamp="1589991309174">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991309174" />
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307223605" />
-    <state x="350" y="103" key="Vcs.Push.Dialog.v2/0.0.1920.1016/1920.0.1920.1080@0.0.1920.1016" timestamp="1590158639786" />
-    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2/0.0.1920.1016@0.0.1920.1016" timestamp="1590364496167" />
-    <state x="633" y="53" width="643" height="908" key="git4idea.branch.GitSmartOperationDialog" timestamp="1590095819024">
-      <screen x="0" y="0" width="1920" height="1016" />
-    </state>
-    <state x="633" y="53" width="643" height="908" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590095819024" />
   </component>
 </project>
