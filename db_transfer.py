@@ -2,7 +2,7 @@ from psycopg2 import connect, Error
 from sshtunnel import SSHTunnelForwarder
 from config import sshconfig, db_origin, db_target
 
-categories = ["Netzwelt", "Wissenschaft"]
+categories = ["Gesundheit", "Job & Karriere", "Netzwelt", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
 
 
 # Fetch comments, documents from the origin DB.
@@ -51,16 +51,11 @@ def fetch_entries(category):
             return documents, comments
     except (Exception, Error) as error:
         return error
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-            print("Origin DB disconnected.")
 
 
 # Write comments, documents to the target DB.
 def write_entries(category):
-    print("Transferring documents and comments from " + category + ":")
+    print("Transferring documents and comments from " + category + "...")
     documents, comments = fetch_entries(category)
 
     try:
@@ -88,14 +83,9 @@ def write_entries(category):
         cursor.close()
         connection.close()
         print("Target DB disconnected.")
-        return "Entries committed to target DB."
+        return "Entries committed to target DB." + "\n"
     except (Exception, Error) as error:
         return error
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-            print("Target DB disconnected.")
 
 
 '''for cat in categories:

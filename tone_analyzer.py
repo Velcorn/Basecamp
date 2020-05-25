@@ -4,6 +4,8 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from googletrans import Translator
 from psycopg2 import connect, Error
 from config import db_target
+from re import compile, UNICODE
+
 
 # Set up Tone Analyzer and Translator from Watson
 API_KEY_TL = '2Q5-kJJN8MqVEgGxf5VM2Dv063cL7r5VTp44IcreG3EN'
@@ -30,6 +32,9 @@ tone_analyzer.set_service_url(URL_TA)
 # Temporarily using googletrans to avoid using up quota from Watson Translator.
 googletrans = Translator()
 
+# Remove emojis for googletrans.
+EMOJI = compile(u"[^\U00000000-\U0000d7ff\U0000e000-\U0000ffff]", flags=UNICODE)
+
 
 # Fetch comments from DB.
 def fetch_comments():
@@ -44,7 +49,7 @@ def fetch_comments():
                        "FROM comments "
                        "WHERE translation IS NULL "
                        "ORDER BY id ASC;")
-        comments = cursor.fetchall()
+        comments = cursor.fetchmany(1)
 
         cursor.close()
         connection.close()
@@ -52,11 +57,6 @@ def fetch_comments():
         return comments
     except (Exception, Error) as error:
         return error
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-            print("DB disconnected.")
 
 
 # Analyze the tone of comments from the DB and write results to it.
@@ -74,14 +74,14 @@ def analyze():
         print("Generating analysis and writing results to DB...")
         # Translate each comment and generate tone analysis.
         for comment in comments:
-            comment = str(comment[0]).replace("\n", " ")
+            comment = EMOJI.sub(u'', comment[0])
             # Translate comment and analyze the tone.
             # translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
             translation = googletrans.translate(comment).text
-            tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
+            '''tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
             analysis = []
             for tone in tone_analysis['document_tone']['tones']:
-                analysis.append(tone['tone_name'] + ": " + str(tone['score']))
+                analysis.append(tone['tone_name'] + ": " + str(tone['score']))'''
 
             # Write translation and analysis to DB.
             cursor.execute("UPDATE comments "
@@ -89,10 +89,10 @@ def analyze():
                            "WHERE id=(SELECT id FROM comments WHERE translation IS NULL ORDER BY id ASC LIMIT 1);",
                            (translation, ))
 
-            cursor.execute("UPDATE comments "
+            '''cursor.execute("UPDATE comments "
                            "SET tone=(%s) "
                            "WHERE id=(SELECT id FROM comments WHERE tone IS NULL ORDER BY id ASC LIMIT 1);",
-                           (analysis, ))
+                           (analysis, ))'''
         connection.commit()
 
         cursor.close()
@@ -101,11 +101,6 @@ def analyze():
         return "Committed entries to DB."
     except (Exception, Error) as error:
         return error
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-            print("DB disconnected.")
 
 
 print(analyze())
