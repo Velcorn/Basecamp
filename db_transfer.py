@@ -28,20 +28,24 @@ def fetch_entries(category):
             pattern = '%{}%'.format(term)
 
             print("Fetching documents...")
-            cursor.execute("SELECT id, url, title "
-                           "FROM documents d "
-                           "WHERE metadata LIKE %s"
-                           "ORDER BY id ASC",
+            cursor.execute("select distinct d.id, d.url, d.title "
+                           "from documents d "
+                           "join comments "
+                           "on d.id = comments.doc_id "
+                           "where metadata like %s "
+                           "and comments.user_id is not null "
+                           "order by id asc ",
                            (pattern, ))
             documents = cursor.fetchmany(10)
 
             print("Fetching comments...")
-            cursor.execute("SELECT c.id, c.doc_id, parent_comment_id, c.text, year, month, day "
-                           "FROM comments c "
-                           "JOIN documents "
-                           "ON c.doc_id = documents.id "
-                           "WHERE metadata LIKE %s"
-                           "ORDER BY c.id ASC",
+            cursor.execute("select c.id, doc_id, user_id, parent_comment_id, c.text, year, month, day "
+                           "from comments c "
+                           "join documents "
+                           "on c.doc_id = documents.id "
+                           "where metadata like %s "
+                           "and user_id is not null "
+                           "order by c.id asc",
                            (pattern, ))
             comments = cursor.fetchmany(100)
 
@@ -66,18 +70,18 @@ def write_entries(category):
 
         print("Writing documents...")
         for d in documents:
-            cursor.execute("INSERT INTO documents(id, url, title, category) "
-                           "VALUES(%s, %s, %s, %s) "
-                           "ON CONFLICT DO NOTHING",
+            cursor.execute("insert into documents(id, url, title, category) "
+                           "values(%s, %s, %s, %s) "
+                           "on conflict do nothing",
                            (d[0], d[1], d[2], category))
         connection.commit()
 
         print("Writing comments...")
         for com in comments:
-            cursor.execute("INSERT INTO comments(id, doc_id, parent_comment_id, text, year, month, day) "
-                           "VALUES(%s, %s, %s, %s, %s, %s, %s) "
-                           "ON CONFLICT DO NOTHING",
-                           (com[0], com[1], com[2], com[3], com[4], com[5], com[6]))
+            cursor.execute("insert into comments(id, doc_id, user_id, parent_comment_id, text, year, month, day) "
+                           "values(%s, %s, %s, %s, %s, %s, %s, %s) "
+                           "on conflict do nothing",
+                           (com[0], com[1], com[2], com[3], com[4], com[5], com[6], com[7]))
         connection.commit()
 
         cursor.close()

@@ -45,10 +45,10 @@ def fetch_comments():
         print("DB connected.")
 
         print("Fetching comments...")
-        cursor.execute("SELECT text "
-                       "FROM comments "
-                       "WHERE translation IS NULL "
-                       "ORDER BY id ASC;")
+        cursor.execute("select text "
+                       "from comments "
+                       "where translation is null "
+                       "order by id asc;")
         comments = cursor.fetchmany(1)
 
         cursor.close()
@@ -84,14 +84,14 @@ def analyze():
                 analysis.append(tone['tone_name'] + ": " + str(tone['score']))'''
 
             # Write translation and analysis to DB.
-            cursor.execute("UPDATE comments "
-                           "SET translation=(%s) "
-                           "WHERE id=(SELECT id FROM comments WHERE translation IS NULL ORDER BY id ASC LIMIT 1);",
+            cursor.execute("update comments "
+                           "set translation=(%s) "
+                           "where id=(select id from comments where translation is null order by id asc limit 1);",
                            (translation, ))
 
-            '''cursor.execute("UPDATE comments "
-                           "SET tone=(%s) "
-                           "WHERE id=(SELECT id FROM comments WHERE tone IS NULL ORDER BY id ASC LIMIT 1);",
+            '''cursor.execute("update comments "
+                           "set tone=(%s) "
+                           "where id=(select id from comments where tone is null order by id asc limit 1);",
                            (analysis, ))'''
         connection.commit()
 
