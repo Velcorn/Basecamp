@@ -1,6 +1,6 @@
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import LanguageTranslatorV3
 from ibm_watson import ToneAnalyzerV3
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from googletrans import Translator
 from psycopg2 import connect, Error
 from config import db_target
@@ -32,7 +32,7 @@ tone_analyzer.set_service_url(URL_TA)
 # Temporarily using googletrans to avoid using up quota from Watson Translator.
 googletrans = Translator()
 
-# Remove emojis for googletrans.
+# Remove emojis.
 EMOJI = compile(u"[^\U00000000-\U0000d7ff\U0000e000-\U0000ffff]", flags=UNICODE)
 
 
@@ -77,7 +77,7 @@ def analyze():
             comment = EMOJI.sub(u'', comment[0])
             # Translate comment and analyze the tone.
             # translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
-            translation = googletrans.translate(comment).text
+            translation = googletrans.translate(comment)
             '''tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
             analysis = []
             for tone in tone_analysis['document_tone']['tones']:

@@ -1,5 +1,5 @@
-from psycopg2 import connect, Error
 from sshtunnel import SSHTunnelForwarder
+from psycopg2 import connect, Error
 from config import sshconfig, db_origin, db_target
 
 categories = ["Gesundheit", "Job & Karriere", "Netzwelt", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
