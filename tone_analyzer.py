@@ -2,8 +2,9 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from ibm_watson import LanguageTranslatorV3
 from ibm_watson import ToneAnalyzerV3
 from googletrans import Translator
+from sshtunnel import SSHTunnelForwarder
 from psycopg2 import connect, Error
-from config import db_target
+from config import ssh_config, db_config
 from re import compile, UNICODE
 
 
@@ -38,23 +39,33 @@ EMOJI = compile(u"[^\U00000000-\U0000d7ff\U0000e000-\U0000ffff]", flags=UNICODE)
 
 # Fetch comments from DB.
 def fetch_comments():
+    config = ssh_config()
     try:
-        params = db_target()
-        connection = connect(**params)
-        cursor = connection.cursor()
-        print("DB connected.")
+        with SSHTunnelForwarder(
+                (config["host"], 22),
+                ssh_username=config["user"],
+                ssh_password=config["password"],
+                remote_bind_address=(config["rba"], 5432),
+                local_bind_address=("localhost", 8080)) as tunnel:
+            tunnel.start()
+            print("SSH connected.")
 
-        print("Fetching comments...")
-        cursor.execute("select text "
-                       "from comments "
-                       "where translation is null "
-                       "order by id asc;")
-        comments = cursor.fetchmany(1)
+            params = db_config()
+            connection = connect(**params)
+            cursor = connection.cursor()
+            print("DB connected.")
 
-        cursor.close()
-        connection.close()
-        print("DB disconnected.")
-        return comments
+            print("Fetching comments...")
+            cursor.execute("select text "
+                           "from comments "
+                           "where translation is null "
+                           "order by id asc;")
+            comments = cursor.fetchmany(1)
+
+            cursor.close()
+            connection.close()
+            print("DB disconnected.")
+            return comments
     except (Exception, Error) as error:
         return error
 
@@ -64,12 +75,21 @@ def analyze():
     # Get comments from the DB.
     comments = fetch_comments()
 
+    config = ssh_config()
     try:
-        # Open DB connection.
-        params = db_target()
-        connection = connect(**params)
-        cursor = connection.cursor()
-        print("DB connected.")
+        with SSHTunnelForwarder(
+                (config["host"], 22),
+                ssh_username=config["user"],
+                ssh_password=config["password"],
+                remote_bind_address=(config["rba"], 5432),
+                local_bind_address=("localhost", 8080)) as tunnel:
+            tunnel.start()
+            print("SSH connected.")
+
+            params = db_config()
+            connection = connect(**params)
+            cursor = connection.cursor()
+            print("DB connected.")
 
         print("Generating analysis and writing results to DB...")
         # Translate each comment and generate tone analysis.
