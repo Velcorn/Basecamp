@@ -63,27 +63,20 @@ def create_data(category):
             connection.commit()
 
             print("Writing categories...")
-            cursor.execute("select count(id) "
+            cursor.execute("select count(id), sum(comment_count) "
                            "from a_documents d "
                            "where category = %s",
                            (equals_pattern, ))
-            doc_count = cursor.fetchall()
-
-            cursor.execute("select sum(comment_count) "
-                           "from a_documents d "
-                           "where category = %s",
-                           (equals_pattern, ))
-            comment_count = cursor.fetchall()
+            counts = cursor.fetchall()
 
             cursor.execute("insert into a_categories(name, doc_count, comment_count) " 
                            "values(%s, %s, %s) "
                            "on conflict (name) do update "
                            "set (doc_count, comment_count) = (EXCLUDED.doc_count, EXCLUDED.comment_count)",
-                           (category, doc_count[0], comment_count[0]))
+                           (category, counts[0], counts[1]))
             connection.commit()
 
             print("Writing users...")
-
 
             # Close everything.
             cursor.close()

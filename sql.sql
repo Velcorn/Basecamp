@@ -34,10 +34,15 @@ select distinct d.id, d.url, d.title, count(comments)
 from documents d
 join comments
 on d.id = comments.doc_id
-where metadata like '%"channel": "Channel"%'
+where metadata like '%"channel": "category"%'
 and comments.user_id is not null
 group by d.id
 order by count(comments) desc
+
+insert into a_documents(id, url, title, category, comment_count)
+values(%s, %s, %s, %s, %s)
+on conflict (id) do update
+set comment_count = EXCLUDED.comment_count
 
 select c.id, doc_id, user_id, parent_comment_id, c.text, year, month, day
 from comments c
@@ -45,11 +50,15 @@ join a_documents
 on doc_id = a_documents.id
 order by c.id asc
 
-insert into a_documents(id, url, title, category, comment_count)
-values(%s, %s, %s, %s, %s)
-on conflict (id) do update
-set comment_count = EXCLUDED.comment_count
-
 insert into a_comments(id, doc_id, user_id, parent_comment_id, text, year, month, day)
 values(%s, %s, %s, %s, %s, %s, %s, %s)
 on conflict do nothing
+
+select count(id), sum(comment_count)
+from a_documents d
+where category = 'category'
+
+insert into a_categories(name, doc_count, comment_count)
+values(%s, %s, %s)
+on conflict (name) do update
+set (doc_count, comment_count) = (EXCLUDED.doc_count, EXCLUDED.comment_count)

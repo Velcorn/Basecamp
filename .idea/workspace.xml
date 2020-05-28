@@ -22,7 +22,7 @@
     <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transfer_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/transfer_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transfer_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +56,28 @@
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
-  <component name="RunManager" selected="Python.transfer_data">
+  <component name="RunManager" selected="Python.create_data">
+    <configuration name="create_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Basecamp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/create_data.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="data_transfer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Basecamp" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -91,27 +112,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tone_analyzer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="transfer_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Basecamp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/transfer_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -164,7 +164,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.transfer_data" />
+        <item itemvalue="Python.create_data" />
         <item itemvalue="Python.tone_analyzer" />
         <item itemvalue="Python.data_transfer" />
         <item itemvalue="Python.webcrawl" />
@@ -260,10 +260,26 @@
       <option name="project" value="LOCAL" />
       <updated>1590536518189</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Documents, comments, categories working.">
+      <created>1590625450580</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1590625450580</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
@@ -275,7 +291,8 @@
     <MESSAGE value="Some sorting of query results" />
     <MESSAGE value="Some fixes" />
     <MESSAGE value="Some fixes for db transfer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some fixes for db transfer" />
+    <MESSAGE value="Documents, comments, categories working." />
+    <option name="LAST_COMMIT_MESSAGE" value="Documents, comments, categories working." />
   </component>
   <component name="WindowStateProjectService">
     <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590615883456">
@@ -284,11 +301,12 @@
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595529236" />
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
     <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590615883456" />
-    <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1590536517907">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2" timestamp="1590625450479">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590536517907" />
     <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307222206" />
+    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2/0.0.1920.1016@0.0.1920.1016" timestamp="1590625450479" />
     <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1589991332476">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -327,18 +345,20 @@
     </state>
     <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590540859103" />
     <state x="155" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307188437" />
-    <state x="233" y="69" key="Vcs.Push.Dialog.v2" timestamp="1590536527922">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1590625452392">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590536527922" />
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307223605" />
+    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2/0.0.1920.1016@0.0.1920.1016" timestamp="1590625452392" />
     <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1590624384098">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590624384098" />
-    <state x="1920" y="0" width="1033" height="459" maximized="true" key="dock-window-1" timestamp="1590533910639">
-      <screen x="1920" y="0" width="1280" height="680" />
+    <state x="252" y="0" width="1668" height="655" key="dock-window-1" timestamp="1590625519376">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="1920" y="0" width="1033" height="459" maximized="true" key="dock-window-1/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590533910639" />
+    <state x="252" y="0" width="1668" height="655" key="dock-window-1/0.0.1920.1016@0.0.1920.1016" timestamp="1590625519376" />
   </component>
 </project>
