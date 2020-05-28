@@ -2,7 +2,7 @@ from sshtunnel import SSHTunnelForwarder
 from psycopg2 import connect, Error
 from config import ssh_config, db_config
 
-categories = ["Gesundheit", "Mobilität", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
+categories = ["Gesundheit", "Kultur", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
 
 
 # Transfer relevant data to new tables and fill remaining holes.
@@ -68,12 +68,11 @@ def create_data(category):
                            "where category = %s",
                            (equals_pattern, ))
             counts = cursor.fetchall()
-
             cursor.execute("insert into a_categories(name, doc_count, comment_count) " 
                            "values(%s, %s, %s) "
                            "on conflict (name) do update "
                            "set (doc_count, comment_count) = (EXCLUDED.doc_count, EXCLUDED.comment_count)",
-                           (category, counts[0], counts[1]))
+                           (category, counts[0][0], counts[0][1]))
             connection.commit()
 
             print("Writing users...")
