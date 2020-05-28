@@ -19,33 +19,36 @@ month int,
 day int);
 
 create table a_categories(
-name varchar,
+name varchar primary key,
+doc_count int,
+comment_count int,
 tone text);
 
 create table a_users(
-id int,
+id int primary key,
 comment_count int,
 tone text,
 personality text);
 
-select distinct d.id, d.url, d.title
+select distinct d.id, d.url, d.title, count(comments)
 from documents d
 join comments
 on d.id = comments.doc_id
 where metadata like '%"channel": "Channel"%'
 and comments.user_id is not null
-order by id asc
+group by d.id
+order by count(comments) desc
 
-select c.id, doc_id, user_id, parent_comment_id, c."text", "year", "month", "day"
+select c.id, doc_id, user_id, parent_comment_id, c.text, year, month, day
 from comments c
-join documents on documents.id = c.doc_id
-where metadata like '%"channel": "Channel"%'
-and user_id is not null
+join a_documents
+on doc_id = a_documents.id
 order by c.id asc
 
-insert into a_documents(id, url, title, category)
-values(%s, %s, %s, %s)
-on conflict do nothing
+insert into a_documents(id, url, title, category, comment_count)
+values(%s, %s, %s, %s, %s)
+on conflict (id) do update
+set comment_count = EXCLUDED.comment_count
 
 insert into a_comments(id, doc_id, user_id, parent_comment_id, text, year, month, day)
 values(%s, %s, %s, %s, %s, %s, %s, %s)

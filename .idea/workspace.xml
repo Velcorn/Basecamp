@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/transfer_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_transfer.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tone_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tone_analyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transfer_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/transfer_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,6 +263,9 @@
     <option name="localTasksCounter" value="12" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="venv in gitignore" />
     <MESSAGE value="Remove tone_analysis.txt for testing purposes" />
@@ -261,11 +278,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="Some fixes for db transfer" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590595529236">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590615883456">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595529236" />
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
+    <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590615883456" />
     <state x="296" y="0" key="CommitChangelistDialog2" timestamp="1590536517907">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -276,30 +294,34 @@
     </state>
     <state x="421" y="81" key="FileChooserDialogImpl/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1589991332476" />
     <state x="421" y="81" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307186557" />
-    <state width="1259" height="148" key="GridCell.Tab.0.bottom" timestamp="1590595844780">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="932" height="273" key="GridCell.Tab.0.bottom" timestamp="1590625379962">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.bottom/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595844780" />
     <state width="1244" height="148" key="GridCell.Tab.0.bottom/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1259" height="148" key="GridCell.Tab.0.center" timestamp="1590595844780">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="932" height="273" key="GridCell.Tab.0.bottom/0.0.1920.1016@0.0.1920.1016" timestamp="1590625379962" />
+    <state width="932" height="273" key="GridCell.Tab.0.center" timestamp="1590625379962">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.center/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595844780" />
     <state width="1244" height="148" key="GridCell.Tab.0.center/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1259" height="148" key="GridCell.Tab.0.left" timestamp="1590595844780">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="932" height="273" key="GridCell.Tab.0.center/0.0.1920.1016@0.0.1920.1016" timestamp="1590625379962" />
+    <state width="932" height="273" key="GridCell.Tab.0.left" timestamp="1590625379961">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.left/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595844780" />
     <state width="1244" height="148" key="GridCell.Tab.0.left/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
-    <state width="1259" height="148" key="GridCell.Tab.0.right" timestamp="1590595844780">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="932" height="273" key="GridCell.Tab.0.left/0.0.1920.1016@0.0.1920.1016" timestamp="1590625379961" />
+    <state width="932" height="273" key="GridCell.Tab.0.right" timestamp="1590625379962">
+      <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@-1920.0.1280.680" timestamp="1589990909737" />
     <state width="1259" height="148" key="GridCell.Tab.0.right/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595844780" />
     <state width="1244" height="148" key="GridCell.Tab.0.right/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589377090936" />
+    <state width="932" height="273" key="GridCell.Tab.0.right/0.0.1920.1016@0.0.1920.1016" timestamp="1590625379962" />
     <state x="155" y="0" key="SettingsEditor" timestamp="1590540859103">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -310,6 +332,10 @@
     </state>
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590536527922" />
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307223605" />
+    <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1590624384098">
+      <screen x="0" y="0" width="1920" height="1016" />
+    </state>
+    <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590624384098" />
     <state x="1920" y="0" width="1033" height="459" maximized="true" key="dock-window-1" timestamp="1590533910639">
       <screen x="1920" y="0" width="1280" height="680" />
     </state>
