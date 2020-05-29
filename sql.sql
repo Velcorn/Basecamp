@@ -44,10 +44,11 @@ values(%s, %s, %s, %s, %s)
 on conflict (id) do update
 set comment_count = EXCLUDED.comment_count
 
-select c.id, doc_id, user_id, parent_comment_id, c.text, year, month, day
+select distinct c.id, doc_id, user_id, parent_comment_id, c.text, year, month, day
 from comments c
 join a_documents
 on doc_id = a_documents.id
+where user_id is not null
 order by c.id asc
 
 insert into a_comments(id, doc_id, user_id, parent_comment_id, text, year, month, day)
@@ -62,3 +63,22 @@ insert into a_categories(name, doc_count, comment_count)
 values(%s, %s, %s)
 on conflict (name) do update
 set (doc_count, comment_count) = (EXCLUDED.doc_count, EXCLUDED.comment_count)
+
+select user_id, count(user_id)
+from a_comments c
+group by user_id
+order by count(user_id) desc)
+
+insert into a_users(id, comment_count)
+values(%s, %s)
+on conflict (id) do update
+set comment_count = EXCLUDED.comment_count
+
+select text
+from a_comments
+where translation is null
+order by id asc
+
+update a_comments
+set translation = %s, tone = %s
+where id = %s

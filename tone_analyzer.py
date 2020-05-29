@@ -4,16 +4,17 @@ from ibm_watson import ToneAnalyzerV3
 from googletrans import Translator
 from sshtunnel import SSHTunnelForwarder
 from psycopg2 import connect, Error
-from config import ssh_config, db_config
+from config import api_config, ssh_config, db_config
 from re import compile, UNICODE
 
 
 # Set up Tone Analyzer and Translator from Watson
-API_KEY_TL = '2Q5-kJJN8MqVEgGxf5VM2Dv063cL7r5VTp44IcreG3EN'
-API_KEY_TA = '1zk1LfROS3ccoX0iEOBomvK6euIpbJSkp9K-wu2IzS_A'
-URL_TL = 'https://api.eu-de.language-translator.watson.cloud.ibm.com/instances/371a365a-dafb-4d40-8f7a-0da85693ee4a'
-URL_TA = 'https://api.eu-de.tone-analyzer.watson.cloud.ibm.com/instances/d0f39694-bd5f-4d32-900c-e689a9109a31'
-VERSION = '2020-05-08'
+api = api_config()
+API_KEY_TL = api["key_tl"]
+API_KEY_TA = api["key_ta"]
+URL_TL = api["url_tl"]
+URL_TA = api["url_ta"]
+VERSION = api["version"]
 
 authenticator_tl = IAMAuthenticator(API_KEY_TL)
 translator = LanguageTranslatorV3(
@@ -33,92 +34,57 @@ tone_analyzer.set_service_url(URL_TA)
 # Temporarily using googletrans to avoid using up quota from Watson Translator.
 googletrans = Translator()
 
-# Remove emojis.
+# Emoji regex.
 EMOJI = compile(u"[^\U00000000-\U0000d7ff\U0000e000-\U0000ffff]", flags=UNICODE)
-
-
-# Fetch comments from DB.
-def fetch_comments():
-    config = ssh_config()
-    try:
-        with SSHTunnelForwarder(
-                (config["host"], 22),
-                ssh_username=config["user"],
-                ssh_password=config["password"],
-                remote_bind_address=(config["rba"], 5432),
-                local_bind_address=("localhost", 8080)) as tunnel:
-            tunnel.start()
-            print("SSH connected.")
-
-            params = db_config()
-            connection = connect(**params)
-            cursor = connection.cursor()
-            print("DB connected.")
-
-            print("Fetching comments...")
-            cursor.execute("select text "
-                           "from comments "
-                           "where translation is null "
-                           "order by id asc;")
-            comments = cursor.fetchmany(1)
-
-            cursor.close()
-            connection.close()
-            print("DB disconnected.")
-            return comments
-    except (Exception, Error) as error:
-        return error
 
 
 # Analyze the tone of comments from the DB and write results to it.
 def analyze():
-    # Get comments from the DB.
-    comments = fetch_comments()
-
-    config = ssh_config()
+    ssh = ssh_config()
     try:
         with SSHTunnelForwarder(
-                (config["host"], 22),
-                ssh_username=config["user"],
-                ssh_password=config["password"],
-                remote_bind_address=(config["rba"], 5432),
+                (ssh["host"], 22),
+                ssh_username=ssh["user"],
+                ssh_password=ssh["password"],
+                remote_bind_address=(ssh["rba"], 5432),
                 local_bind_address=("localhost", 8080)) as tunnel:
             tunnel.start()
-            print("SSH connected.")
 
             params = db_config()
             connection = connect(**params)
             cursor = connection.cursor()
-            print("DB connected.")
 
-        print("Generating analysis and writing results to DB...")
-        # Translate each comment and generate tone analysis.
-        for comment in comments:
-            comment = EMOJI.sub(u'', comment[0])
-            # Translate comment and analyze the tone.
-            # translation = translator.translate(comment, model_id='de-en').get_result()['translations'][0]['translation']
-            translation = googletrans.translate(comment)
-            '''tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
-            analysis = []
-            for tone in tone_analysis['document_tone']['tones']:
-                analysis.append(tone['tone_name'] + ": " + str(tone['score']))'''
+            print("Fetching comments...")
+            cursor.execute("select id, text "
+                           "from a_comments "
+                           "where translation is null "
+                           "order by id asc")
+            comments = cursor.fetchall()
+            print("Fetched comments.")
 
-            # Write translation and analysis to DB.
-            cursor.execute("update comments "
-                           "set translation=(%s) "
-                           "where id=(select id from comments where translation is null order by id asc limit 1);",
-                           (translation, ))
+            print("Generating analysis and writing results to DB...")
+            # Translate each comment and generate tone analysis.
+            for com in comments:
+                # Remove emojis.
+                text = EMOJI.sub(u'', com[1])
+                # Translate comment and analyze the tone.
+                translation = translator.translate(text, model_id='de-en').get_result()['translations'][0]['translation']
+                # translation = googletrans.translate(text).text
+                tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
+                tones = []
+                for tone in tone_analysis['document_tone']['tones']:
+                    tones.append(tone['tone_name'] + ": " + str(tone['score']))
 
-            '''cursor.execute("update comments "
-                           "set tone=(%s) "
-                           "where id=(select id from comments where tone is null order by id asc limit 1);",
-                           (analysis, ))'''
-        connection.commit()
+                # Write translation and analysis to DB.
+                cursor.execute("update a_comments "
+                               "set translation = %s, tone = %s "
+                               "where id = %s",
+                               (translation, tones, com[0]))
+                connection.commit()
 
-        cursor.close()
-        connection.close()
-        print("DB disconnected.")
-        return "Committed entries to DB."
+            cursor.close()
+            connection.close()
+            return "Wrote results to DB."
     except (Exception, Error) as error:
         return error
 
