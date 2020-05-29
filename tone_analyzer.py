@@ -31,7 +31,7 @@ tone_analyzer = ToneAnalyzerV3(
 translator.set_service_url(URL_TL)
 tone_analyzer.set_service_url(URL_TA)
 
-# Temporarily using googletrans to avoid using up quota from Watson Translator.
+# Googletrans to save quota.
 googletrans = Translator()
 
 # Emoji regex.
