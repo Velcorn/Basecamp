@@ -22,7 +22,6 @@
     <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/create_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/sql.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590713278164</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Duplicate parent_comment_id and issues with backtracking, because of parent_comment possibly having another parent...&#10;Pause for now as DB is down.">
+      <created>1590760998918</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1590760998918</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -314,7 +320,8 @@
     <MESSAGE value="Some fixes for db transfer" />
     <MESSAGE value="Documents, comments, categories working." />
     <MESSAGE value="Everything actually works :P" />
-    <option name="LAST_COMMIT_MESSAGE" value="Everything actually works :P" />
+    <MESSAGE value="Duplicate parent_comment_id and issues with backtracking, because of parent_comment possibly having another parent...&#10;Pause for now as DB is down." />
+    <option name="LAST_COMMIT_MESSAGE" value="Duplicate parent_comment_id and issues with backtracking, because of parent_comment possibly having another parent...&#10;Pause for now as DB is down." />
   </component>
   <component name="WindowStateProjectService">
     <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590615883456">
@@ -323,12 +330,12 @@
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590595529236" />
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
     <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590615883456" />
-    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2" timestamp="1590713278093">
+    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2" timestamp="1590760998740">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590536517907" />
     <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307222206" />
-    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2/0.0.1920.1016@0.0.1920.1016" timestamp="1590713278093" />
+    <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2/0.0.1920.1016@0.0.1920.1016" timestamp="1590760998740" />
     <state x="421" y="81" key="FileChooserDialogImpl" timestamp="1589991332476">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -367,21 +374,21 @@
     </state>
     <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590540859103" />
     <state x="155" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307188437" />
-    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1590713279504">
+    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1590761001340">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590536527922" />
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307223605" />
-    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2/0.0.1920.1016@0.0.1920.1016" timestamp="1590713279504" />
+    <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2/0.0.1920.1016@0.0.1920.1016" timestamp="1590761001340" />
     <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1590624384098">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590624384098" />
-    <state x="467" y="0" width="753" height="655" key="dock-window-1" timestamp="1590760850070">
+    <state x="388" y="49" width="753" height="655" key="dock-window-1" timestamp="1590764721558">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>
     <state x="1920" y="0" width="1033" height="459" maximized="true" key="dock-window-1/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590533910639" />
-    <state x="467" y="0" width="753" height="655" key="dock-window-1/0.0.1920.1016@0.0.1920.1016" timestamp="1590760850070" />
+    <state x="388" y="49" width="753" height="655" key="dock-window-1/0.0.1920.1016@0.0.1920.1016" timestamp="1590764721558" />
     <state x="258" y="0" width="1662" height="655" key="dock-window-2" timestamp="1590744031586">
       <screen x="0" y="0" width="1920" height="1016" />
     </state>

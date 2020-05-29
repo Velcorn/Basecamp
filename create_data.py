@@ -82,11 +82,12 @@ def create_data(category):
                                        (ans[0], ans[1], ans[2], ans[3], ans[4]))
                     connection.commit()
 
-                    cursor.execute("select distinct c.id, doc_id, user_id, parent_comment_id, c.text "
+                    cursor.execute("select distinct on "
+                                   "(parent_comment_id) c.id, doc_id, user_id, parent_comment_id, c.text "
                                    "from comments c "
                                    "join a_comments "
                                    "on c.id = a_comments.parent_comment_id "
-                                   "order by c.id asc "
+                                   "order by parent_comment_id, c.id asc "
                                    "limit 10")
                     comments = cursor.fetchall()
 
