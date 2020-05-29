@@ -22,48 +22,81 @@ def create_data(category):
             connection = connect(**params)
             cursor = connection.cursor()
 
-            # Search pattern for like query.
+            # Category search patterns for queries.
             like_pattern = '%{}%'.format("\"channel\": " + "\"" + category + "\"")
             equals_pattern = '{}'.format(category)
 
-            print("Writing documents...")
-            cursor.execute("select distinct d.id, d.url, d.title, count(comments) "
-                           "from documents d "
-                           "join comments "
-                           "on d.id = comments.doc_id "
-                           "where metadata like %s "
-                           "and comments.user_id is not null "
-                           "group by d.id "
-                           "order by count(comments) desc",
-                           (like_pattern, ))
-            documents = cursor.fetchmany(10)
+            cursor.execute("select distinct c.year, c.month, c.day "
+                           "from comments c "
+                           "join documents "
+                           "on doc_id = documents.id "
+                           "where user_id is not null "
+                           "group by c.year, c.month, c.day")
+            days = cursor.fetchall()
 
-            for doc in documents:
-                cursor.execute("insert into a_documents(id, url, title, category, comment_count) "
-                               "values(%s, %s, %s, %s, %s) "
-                               "on conflict (id) do update "
-                               "set comment_count = EXCLUDED.comment_count",
-                               (doc[0], doc[1], doc[2], category, doc[3]))
-            connection.commit()
+            print("Writing documents and comments...")
+            for day in days:
+                # Create a day pattern for query.
+                year = str(day[0])
+                month = str(day[1]) if int(day[1]) > 10 else "0" + str(day[1])
+                day = str(day[2]) if int(day[2]) > 10 else "0" + str(day[2])
+                day_pattern = '%{}%'.format(year + "-" + month + "-" + day)
 
-            print("Writing comments...")
-            for doc in documents:
-                cursor.execute("select distinct c.id, doc_id, user_id, parent_comment_id, c.text, year, month, day "
-                               "from comments c "
-                               "join a_documents "
-                               "on doc_id = %s "
-                               "where user_id is not null "
-                               "order by c.id asc",
-                               (doc[0], ))
-                comments = cursor.fetchmany(100)
+                cursor.execute("select distinct d.id, d.url, d.title, count(comments) "
+                               "from documents d "
+                               "join comments "
+                               "on d.id = comments.doc_id "
+                               "where metadata like %s "
+                               "and to_char(d.timestamp, 'YYYY-MM-DD') like %s "
+                               "and comments.user_id is not null "
+                               "group by d.id "
+                               "order by count(comments) desc "
+                               "limit 1",
+                               (like_pattern, day_pattern, ))
+                doc = cursor.fetchall()
 
-                for com in comments:
-                    cursor.execute("insert into a_comments "
-                                   "(id, doc_id, user_id, parent_comment_id, text, year, month, day) "
-                                   "values(%s, %s, %s, %s, %s, %s, %s, %s) "
-                                   "on conflict do nothing",
-                                   (com[0], com[1], com[2], com[3], com[4], com[5], com[6], com[7]))
-                connection.commit()
+                if doc:
+                    cursor.execute("insert into a_documents(id, url, title, category, comment_count) "
+                                   "values(%s, %s, %s, %s, %s) "
+                                   "on conflict (id) do update "
+                                   "set comment_count = EXCLUDED.comment_count",
+                                   (doc[0][0], doc[0][1], doc[0][2], category, doc[0][3]))
+                    connection.commit()
+
+                    cursor.execute("select distinct c.id, doc_id, user_id, parent_comment_id, c.text "
+                                   "from comments c "
+                                   "join a_documents "
+                                   "on doc_id = %s "
+                                   "where user_id is not null "
+                                   "and parent_comment_id is not null "
+                                   "order by parent_comment_id asc "
+                                   "limit 10",
+                                   (doc[0][0], ))
+                    answers = cursor.fetchall()
+
+                    for ans in answers:
+                        cursor.execute("insert into a_comments "
+                                       "(id, doc_id, user_id, parent_comment_id, text) "
+                                       "values(%s, %s, %s, %s, %s) "
+                                       "on conflict do nothing",
+                                       (ans[0], ans[1], ans[2], ans[3], ans[4]))
+                    connection.commit()
+
+                    cursor.execute("select distinct c.id, doc_id, user_id, parent_comment_id, c.text "
+                                   "from comments c "
+                                   "join a_comments "
+                                   "on c.id = a_comments.parent_comment_id "
+                                   "order by c.id asc "
+                                   "limit 10")
+                    comments = cursor.fetchall()
+
+                    for com in comments:
+                        cursor.execute("insert into a_comments "
+                                       "(id, doc_id, user_id, parent_comment_id, text) "
+                                       "values(%s, %s, %s, %s, %s) "
+                                       "on conflict do nothing",
+                                       (com[0], com[1], com[2], com[3], com[4]))
+                    connection.commit()
 
             print("Writing categories...")
             cursor.execute("select count(id), sum(comment_count) "
@@ -107,9 +140,10 @@ def update_users():
             cursor.execute("select user_id, count(user_id) "
                            "from a_comments "
                            "group by user_id "
-                           "order by count(user_id) desc")
+                           "order by count(user_id) desc "
+                           "limit 10")
 
-            users = cursor.fetchmany(10)
+            users = cursor.fetchall()
 
             for user in users:
                 cursor.execute("insert into a_users(id, comment_count) "
@@ -127,4 +161,4 @@ def update_users():
 
 for cat in categories:
     print(create_data(cat))
-print(update_users())
+# print(update_users())
