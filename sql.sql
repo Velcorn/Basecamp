@@ -39,7 +39,7 @@ from documents d
 join comments
 on d.id = comments.doc_id
 where metadata like '%"channel": "category"%'
-and timestamp like %s
+and to_char(d.timestamp, 'YYYY-MM-DD') like day
 and comments.user_id is not null
 group by d.id
 order by count(comments) desc
@@ -47,21 +47,28 @@ limit 1
 
 insert into a_documents(id, url, title, category, comment_count)
 values(%s, %s, %s, %s, %s)
-on conflict (id) do update
-set comment_count = EXCLUDED.comment_count
+on conflict do nothing
 
-select distinct c.id, doc_id, user_id, parent_comment_id, c.text
+select distinct on (parent_comment_id) c.id, doc_id, user_id, parent_comment_id, c.text
 from comments c
 join a_documents
 on doc_id = a_documents.id
 where user_id is not null
 and parent_comment_id is not null
-order by parent_comment_id asc
+and (select parent_comment_id from comments p where id = c.parent_comment_id) is null
+order by parent_comment_id, c.id asc
 limit 10
 
 insert into a_comments(id, doc_id, user_id, parent_comment_id, text)
 values(%s, %s, %s, %s, %s)
 on conflict do nothing
+
+select distinct c.id, c.doc_id, c.user_id, c.parent_comment_id, c.text
+from comments c
+join a_comments
+on c.id = a_comments.parent_comment_id
+order by c.id asc
+limit 10
 
 select count(id), sum(comment_count)
 from a_documents d

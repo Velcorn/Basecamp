@@ -56,20 +56,22 @@ def create_data(category):
                 doc = cursor.fetchall()
 
                 if doc:
-                    cursor.execute("insert into a_documents(id, url, title, category, comment_count) "
-                                   "values(%s, %s, %s, %s, %s) "
-                                   "on conflict (id) do update "
-                                   "set comment_count = EXCLUDED.comment_count",
-                                   (doc[0][0], doc[0][1], doc[0][2], category, doc[0][3]))
+                    cursor.execute("insert into a_documents(id, url, title, category) "
+                                   "values(%s, %s, %s, %s) "
+                                   "on conflict do nothing",
+                                   (doc[0][0], doc[0][1], doc[0][2], category))
                     connection.commit()
 
-                    cursor.execute("select distinct c.id, doc_id, user_id, parent_comment_id, c.text "
+                    cursor.execute("select distinct on "
+                                   "(parent_comment_id) c.id, doc_id, user_id, parent_comment_id, c.text "
                                    "from comments c "
                                    "join a_documents "
                                    "on doc_id = %s "
                                    "where user_id is not null "
                                    "and parent_comment_id is not null "
-                                   "order by parent_comment_id asc "
+                                   "and (select parent_comment_id "
+                                   "from comments p where id = c.parent_comment_id) is null "
+                                   "order by parent_comment_id, c.id asc "
                                    "limit 10",
                                    (doc[0][0], ))
                     answers = cursor.fetchall()
@@ -82,12 +84,11 @@ def create_data(category):
                                        (ans[0], ans[1], ans[2], ans[3], ans[4]))
                     connection.commit()
 
-                    cursor.execute("select distinct on "
-                                   "(parent_comment_id) c.id, doc_id, user_id, parent_comment_id, c.text "
+                    cursor.execute("select distinct c.id, c.doc_id, c.user_id, c.parent_comment_id, c.text "
                                    "from comments c "
                                    "join a_comments "
                                    "on c.id = a_comments.parent_comment_id "
-                                   "order by parent_comment_id, c.id asc "
+                                   "order by c.id asc "
                                    "limit 10")
                     comments = cursor.fetchall()
 
@@ -98,6 +99,18 @@ def create_data(category):
                                        "on conflict do nothing",
                                        (com[0], com[1], com[2], com[3], com[4]))
                     connection.commit()
+
+                    cursor.execute("select count(c) "
+                                   "from a_comments c "
+                                   "where c.doc_id = %s",
+                                   (doc[0][0], ))
+                    comment_count = cursor.fetchall()
+
+                    cursor.execute("insert into a_documents(id, comment_count) "
+                                   "values(%s, %s) "
+                                   "on conflict (id) do update "
+                                   "set comment_count = EXCLUDED.comment_count",
+                                   (doc[0][0], comment_count[0][0]))
 
             print("Writing categories...")
             cursor.execute("select count(id), sum(comment_count) "
