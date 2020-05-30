@@ -71,11 +71,12 @@ def analyze():
                 translation = translator.translate(text, model_id='de-en').get_result()['translations'][0]['translation']
                 # translation = googletrans.translate(text).text
                 tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
+
                 tones = []
                 for tone in tone_analysis['document_tone']['tones']:
                     tones.append(tone['tone_name'] + ": " + str(tone['score']))
 
-                # Write translation and analysis to DB.
+                # Write translation and tone to DB.
                 cursor.execute("update a_comments "
                                "set translation = %s, tone = %s "
                                "where id = %s",
@@ -91,7 +92,6 @@ def analyze():
         if connection:
             cursor.close()
             connection.close()
-            return "Connection closed due to error."
 
 
 print(analyze())

@@ -140,7 +140,6 @@ def create_data():
         if connection:
             cursor.close()
             connection.close()
-            return "Connection closed due to error."
 
 
 def update_users():
@@ -183,7 +182,6 @@ def update_users():
         if connection:
             cursor.close()
             connection.close()
-            return "Connection closed due to error."
 
 
 print(create_data())
