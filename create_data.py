@@ -71,7 +71,7 @@ def create_data():
                                        "where user_id is not null "
                                        "and parent_comment_id is not null "
                                        "and (select parent_comment_id "
-                                       "from comments p where id = c.parent_comment_id) is null "
+                                       "from comments pc where id = c.parent_comment_id) is null "
                                        "order by parent_comment_id, c.id asc "
                                        "limit 10",
                                        (doc[0][0], ))

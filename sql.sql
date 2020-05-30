@@ -55,7 +55,7 @@ join a_documents
 on doc_id = a_documents.id
 where user_id is not null
 and parent_comment_id is not null
-and (select parent_comment_id from comments p where id = c.parent_comment_id) is null
+and (select parent_comment_id from comments pc where id = c.parent_comment_id) is null
 order by parent_comment_id, c.id asc
 limit 10
 
