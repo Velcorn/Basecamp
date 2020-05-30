@@ -84,9 +84,14 @@ def analyze():
 
             cursor.close()
             connection.close()
-            return "Wrote results to DB."
+            return "Finished writing results to DB."
     except (Exception, Error) as error:
         return error
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+            return "Connection closed due to error."
 
 
 print(analyze())

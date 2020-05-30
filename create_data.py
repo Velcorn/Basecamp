@@ -136,6 +136,11 @@ def create_data():
             return "Finished creating data.\n"
     except (Exception, Error) as error:
         return error
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+            return "Connection closed due to error."
 
 
 def update_users():
@@ -174,6 +179,11 @@ def update_users():
             return "Updated users."
     except (Exception, Error) as error:
         return error
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+            return "Connection closed due to error."
 
 
 print(create_data())
