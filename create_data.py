@@ -84,12 +84,14 @@ def create_data(category):
                                        (ans[0], ans[1], ans[2], ans[3], ans[4]))
                     connection.commit()
 
-                    cursor.execute("select distinct c.id, c.doc_id, c.user_id, c.parent_comment_id, c.text "
+                    cursor.execute("select c.id, c.doc_id, c.user_id, c.parent_comment_id, c.text "
                                    "from comments c "
                                    "join a_comments "
                                    "on c.id = a_comments.parent_comment_id "
+                                   "where c.doc_id = %s "
                                    "order by c.id asc "
-                                   "limit 10")
+                                   "limit 10",
+                                   (doc[0][0], ))
                     comments = cursor.fetchall()
 
                     for com in comments:
@@ -175,4 +177,4 @@ def update_users():
 
 for cat in categories:
     print(create_data(cat))
-# print(update_users())
+print(update_users())

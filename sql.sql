@@ -63,10 +63,11 @@ insert into a_comments(id, doc_id, user_id, parent_comment_id, text)
 values(%s, %s, %s, %s, %s)
 on conflict do nothing
 
-select distinct c.id, c.doc_id, c.user_id, c.parent_comment_id, c.text
+select c.id, c.doc_id, c.user_id, c.parent_comment_id, c.text
 from comments c
 join a_comments
 on c.id = a_comments.parent_comment_id
+where c.doc_id = %s
 order by c.id asc
 limit 10
 
