@@ -6,6 +6,7 @@ from sshtunnel import SSHTunnelForwarder
 from psycopg2 import connect, Error
 from config import api_config, ssh_config, db_config
 from re import compile, UNICODE
+import json
 
 
 # Set up Tone Analyzer and Translator from Watson
@@ -56,7 +57,7 @@ def analyze():
 
             print("Fetching comments...")
             cursor.execute("select id, text "
-                           "from a_comments "
+                           "from b_comments "
                            "where translation is null "
                            "order by id asc")
             comments = cursor.fetchall()
@@ -72,15 +73,21 @@ def analyze():
                 # translation = googletrans.translate(text).text
                 tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
 
-                tones = []
+                tones = {}
                 for tone in tone_analysis['document_tone']['tones']:
-                    tones.append(tone['tone_name'] + ": " + str(tone['score']))
+                    tones[tone['tone_name']] = str(tone['score'])
 
-                # Write translation and tone to DB.
-                cursor.execute("update a_comments "
+                '''# Write translation to DB.
+                cursor.execute("update b_comments "
+                               "set translation = %s "
+                               "where id = %s",
+                               (translation, com[0]))
+                connection.commit()'''
+
+                cursor.execute("update b_comments "
                                "set translation = %s, tone = %s "
                                "where id = %s",
-                               (translation, tones, com[0]))
+                               (translation, json.dumps(tones), com[0]))
                 connection.commit()
 
             cursor.close()
@@ -94,4 +101,59 @@ def analyze():
             connection.close()
 
 
-print(analyze())
+# Calculates the average tone for documents, categories and users.
+def calc_average_tone():
+    ssh = ssh_config()
+    try:
+        with SSHTunnelForwarder(
+                (ssh["host"], 22),
+                ssh_username=ssh["user"],
+                ssh_password=ssh["password"],
+                remote_bind_address=(ssh["rba"], 5432),
+                local_bind_address=("localhost", 8080)) as tunnel:
+            tunnel.start()
+
+            params = db_config()
+            connection = connect(**params)
+            cursor = connection.cursor()
+
+            print("Calculating document tones...")
+            cursor.execute("select d.id "
+                           "from a_documents d "
+                           "order by d.id")
+            documents = cursor.fetchall()
+
+            # Create a list of all tones from all comments from a document.
+            tone_list = []
+            for doc in documents:
+                cursor.execute("select tone "
+                               "from b_comments c "
+                               "where c.doc_id = %s",
+                               (doc[0], ))
+                tones = cursor.fetchall()
+
+                for tone in tones:
+                    if tone[0] != {}:
+                        for key, value in tone[0].items():
+                            tone_list.append([key, float(value)])
+
+            # Calculate the average.
+            tone_average = {}
+            for key, value in tone_list:
+                tone_average.setdefault(key, []).append(value)
+            for key, value in tone_average.items():
+                tone_average[key] = round(sum(value) / len(value), 6)
+
+            print(tone_average)
+
+            print("Calculated tones.")
+    except (Exception, Error) as error:
+        return error
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
+
+# print(analyze())
+print(calc_average_tone())
