@@ -5,7 +5,7 @@ from config import ssh_config, db_config
 
 # Transfer relevant document and comment data to new table and generate remaining data.
 def create_data():
-    categories = ["Gesundheit", "Kultur", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
+    categories = ["Wirtschaft"]
     config = ssh_config()
     try:
         with SSHTunnelForwarder(
@@ -69,10 +69,14 @@ def create_data():
                                        "join a_documents "
                                        "on doc_id = %s "
                                        "where user_id is not null "
+                                       "and c.text is not null "
                                        "and parent_comment_id is not null "
                                        "and (select parent_comment_id "
                                        "from comments pc where id = c.parent_comment_id) is null "
-                                       "order by parent_comment_id, c.id asc "
+                                       "and (select pc.text from comments pc "
+                                       "where id = c.parent_comment_id) is not null "
+                                       "and length(c.text) >= 100 "
+                                       "order by parent_comment_id, length(c.text), c.id asc "
                                        "limit 10",
                                        (doc[0][0], ))
                         answers = cursor.fetchall()
@@ -90,7 +94,7 @@ def create_data():
                                        "join a_comments "
                                        "on c.id = a_comments.parent_comment_id "
                                        "where c.doc_id = %s "
-                                       "order by c.id asc "
+                                       "order by c.id asc, length(c.text) "
                                        "limit 10",
                                        (doc[0][0], ))
                         comments = cursor.fetchall()

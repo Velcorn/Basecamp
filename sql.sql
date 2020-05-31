@@ -4,7 +4,8 @@ url varchar,
 title varchar,
 category text,
 comment_count int,
-tone text);
+comment_tone json,
+answers_tone json);
 
 create table a_comments(
 id int primary key,
@@ -13,18 +14,19 @@ user_id int,
 parent_comment_id int,
 text text,
 translation text,
-tone text);
+tone json);
 
 create table a_categories(
 name varchar primary key,
 doc_count int,
 comment_count int,
-tone text);
+comment_tone json,
+answers_tone json);
 
 create table a_users(
 id int primary key,
 comment_count int,
-tone text,
+comment_tone json,
 personality text);
 
 select distinct c.year, c.month, c.day
@@ -56,6 +58,8 @@ on doc_id = a_documents.id
 where user_id is not null
 and parent_comment_id is not null
 and (select parent_comment_id from comments pc where id = c.parent_comment_id) is null
+and (select pc.text from comments pc where id = c.parent_comment_id) is not null
+and length(c.text) >= 100
 order by parent_comment_id, c.id asc
 limit 10
 
