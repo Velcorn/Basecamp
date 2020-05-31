@@ -207,7 +207,9 @@ def calc_average_tone():
                                (dumps(average_comment_tone), user[0]))
                 connection.commit()
 
-            print("Calculated tones.")
+        cursor.close()
+        connection.close()
+        return "Calculated tones."
     except (Exception, Error) as error:
         return error
     finally:
