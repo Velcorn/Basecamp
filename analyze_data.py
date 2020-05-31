@@ -83,7 +83,7 @@ def analyze_tone():
 
             cursor.close()
             connection.close()
-            return "Finished writing results to DB."
+            return "Finished writing results to DB.\n"
     except (Exception, Error) as error:
         return error
     finally:
@@ -207,9 +207,9 @@ def calc_average_tone():
                                (dumps(average_comment_tone), user[0]))
                 connection.commit()
 
-        cursor.close()
-        connection.close()
-        return "Calculated tones."
+            cursor.close()
+            connection.close()
+            return "Calculated tones.\n"
     except (Exception, Error) as error:
         return error
     finally:
@@ -238,5 +238,5 @@ def list_average(lst):
     return average
 
 
-print(analyze_tone())
+# print(analyze_tone())
 print(calc_average_tone())

@@ -179,7 +179,7 @@ def update_users():
             connection.commit()
             cursor.close()
             connection.close()
-            return "Updated users."
+            return "Updated users.\n"
     except (Exception, Error) as error:
         return error
     finally:
