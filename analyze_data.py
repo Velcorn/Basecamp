@@ -238,5 +238,5 @@ def list_average(lst):
     return average
 
 
-# print(analyze_tone())
+print(analyze_tone())
 print(calc_average_tone())

@@ -5,7 +5,7 @@ from config import ssh_config, db_config
 
 # Transfer relevant document and comment data to new table and generate remaining data.
 def create_data():
-    categories = ["Wirtschaft"]
+    categories = ["Gesundheit", "Kultur", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
     config = ssh_config()
     try:
         with SSHTunnelForwarder(
