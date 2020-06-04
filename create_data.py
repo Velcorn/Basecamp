@@ -134,6 +134,36 @@ def create_data():
                 connection.commit()
                 print("Finished creating data from " + category + ".\n")
 
+            print("Writing users...")
+            cursor.execute("select user_id "
+                           "from comments "
+                           "group by user_id "
+                           "order by count(user_id) desc "
+                           "limit 10")
+            users = cursor.fetchall()
+
+            for user in users:
+                cursor.execute("insert into a_users(id, comment_count) "
+                               "values(%s) "
+                               "on conflict do nothing",
+                               (user[0], 20))
+                connection.commit()
+
+                cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
+                               "where user_id = %s "
+                               "order by length(text) desc "
+                               "limit 20",
+                               (user[0],))
+                comments = cursor.fetchall()
+
+                for com in comments:
+                    cursor.execute("insert into a_comments "
+                                   "(id, doc_id, user_id, parent_comment_id, text) "
+                                   "values(%s, %s, %s, %s, %s) "
+                                   "on conflict do nothing",
+                                   (com[0], com[1], com[2], com[3], com[4]))
+                    connection.commit()
+
             # Close everything.
             cursor.close()
             connection.close()
@@ -146,47 +176,4 @@ def create_data():
             connection.close()
 
 
-def update_users():
-    print("Updating users...")
-    config = ssh_config()
-    try:
-        with SSHTunnelForwarder(
-                (config["host"], 22),
-                ssh_username=config["user"],
-                ssh_password=config["password"],
-                remote_bind_address=(config["rba"], 5432),
-                local_bind_address=("localhost", 8080)) as tunnel:
-            tunnel.start()
-
-            params = db_config()
-            connection = connect(**params)
-            cursor = connection.cursor()
-
-            cursor.execute("select user_id, count(user_id) "
-                           "from a_comments "
-                           "group by user_id "
-                           "order by count(user_id) desc "
-                           "limit 10")
-
-            users = cursor.fetchall()
-
-            for user in users:
-                cursor.execute("insert into a_users(id, comment_count) "
-                               "values(%s, %s) "
-                               "on conflict (id) do update "
-                               "set comment_count = EXCLUDED.comment_count",
-                               (user[0], user[1]))
-            connection.commit()
-            cursor.close()
-            connection.close()
-            return "Updated users.\n"
-    except (Exception, Error) as error:
-        return error
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-
-
 print(create_data())
-print(update_users())

@@ -1,6 +1,5 @@
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from ibm_watson import LanguageTranslatorV3
-from ibm_watson import ToneAnalyzerV3
+from ibm_watson import LanguageTranslatorV3, ToneAnalyzerV3, PersonalityInsightsV3
 from sshtunnel import SSHTunnelForwarder
 from psycopg2 import connect, Error
 from config import api_config, ssh_config, db_config
@@ -12,8 +11,10 @@ from json import dumps
 api = api_config()
 API_KEY_TL = api["key_tl"]
 API_KEY_TA = api["key_ta"]
+API_KEY_PI = api["key_pi"]
 URL_TL = api["url_tl"]
 URL_TA = api["url_ta"]
+URL_PI = api["url_pi"]
 VERSION = api["version"]
 
 authenticator_tl = IAMAuthenticator(API_KEY_TL)
@@ -28,8 +29,15 @@ tone_analyzer = ToneAnalyzerV3(
     authenticator=authenticator_ta
 )
 
+authenticator_pi = IAMAuthenticator(API_KEY_PI)
+pers_analyzer = PersonalityInsightsV3(
+    version=VERSION,
+    authenticator=authenticator_pi
+)
+
 translator.set_service_url(URL_TL)
 tone_analyzer.set_service_url(URL_TA)
+pers_analyzer.set_service_url(URL_PI)
 
 # Emoji regex.
 EMOJI = compile(u"[^\U00000000-\U0000d7ff\U0000e000-\U0000ffff]", flags=UNICODE)
@@ -51,13 +59,11 @@ def analyze_tone():
             connection = connect(**params)
             cursor = connection.cursor()
 
-            print("Fetching comments...")
             cursor.execute("select id, text "
                            "from a_comments "
                            "where translation is null or tone is null "
                            "order by id asc")
             comments = cursor.fetchall()
-            print("Fetched comments.")
 
             print("Generating analysis and writing results to DB...")
             # Translate each comment, generate tone analysis and write it to the DB.
@@ -218,6 +224,64 @@ def calc_average_tone():
             connection.close()
 
 
+# Analyze the personality of users and write results to DB.
+def analyze_personality():
+    ssh = ssh_config()
+    try:
+        with SSHTunnelForwarder(
+                (ssh["host"], 22),
+                ssh_username=ssh["user"],
+                ssh_password=ssh["password"],
+                remote_bind_address=(ssh["rba"], 5432),
+                local_bind_address=("localhost", 8080)) as tunnel:
+            tunnel.start()
+
+            params = db_config()
+            connection = connect(**params)
+            cursor = connection.cursor()
+
+            print("Generating personality insights and writing results to DB...")
+            cursor.execute("select id from a_users "
+                           "where personality is null "
+                           "order by id")
+            users = cursor.fetchall()
+
+            # Get translations of all comments for each user and combine them.
+            for user in users:
+                cursor.execute("select distinct translation from a_comments "
+                               "join a_users on user_id = %s",
+                               (user[0], ))
+                translations = cursor.fetchall()
+                text = []
+                for trans in translations:
+                    text.append(trans[0].replace("\n", " "))
+
+                pers_insight = pers_analyzer.profile({'text': text}, content_type='text/plain',
+                                                     accept='application/json').get_result()
+
+                personality = {}
+                for trait in pers_insight['personality']:
+                    if trait['name'] == "Emotional range":
+                        personality['Neuroticism'] = round(trait['percentile'], 6)
+                    personality[trait['name']] = round(trait['percentile'], 6)
+
+                cursor.execute("update a_users "
+                               "set personality = %s "
+                               "where id = %s",
+                               (dumps(personality), user[0]))
+                connection.commit()
+
+            cursor.close()
+            connection.close()
+            return "Finished writing results to DB.\n"
+    except (Exception, Error) as error:
+        return error
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
+
 # Converts a dict to a list.
 def dict_to_list(dct):
     lst = []
@@ -238,5 +302,6 @@ def list_average(lst):
     return average
 
 
-print(analyze_tone())
-print(calc_average_tone())
+# print(analyze_tone())
+# print(calc_average_tone())
+print(analyze_personality())
