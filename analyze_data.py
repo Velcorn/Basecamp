@@ -242,6 +242,7 @@ def analyze_personality():
 
             print("Generating personality insights and writing results to DB...")
             cursor.execute("select id from a_users "
+                           "where personality is null "
                            "order by id")
             users = cursor.fetchall()
 
@@ -302,6 +303,6 @@ def list_average(lst):
     return average
 
 
-# print(analyze_tone())
-# print(calc_average_tone())
+print(analyze_tone())
+print(calc_average_tone())
 print(analyze_personality())
