@@ -242,7 +242,6 @@ def analyze_personality():
 
             print("Generating personality insights and writing results to DB...")
             cursor.execute("select id from a_users "
-                           "where personality is null "
                            "order by id")
             users = cursor.fetchall()
 
@@ -263,7 +262,8 @@ def analyze_personality():
                 for trait in pers_insight['personality']:
                     if trait['name'] == "Emotional range":
                         personality['Neuroticism'] = round(trait['percentile'], 6)
-                    personality[trait['name']] = round(trait['percentile'], 6)
+                    else:
+                        personality[trait['name']] = round(trait['percentile'], 6)
 
                 cursor.execute("update a_users "
                                "set personality = %s "
