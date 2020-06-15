@@ -139,14 +139,14 @@ def create_data():
                            "from comments "
                            "group by user_id "
                            "order by count(user_id) desc "
-                           "limit 10")
+                           "limit 20")
             users = cursor.fetchall()
 
             for user in users:
-                cursor.execute("insert into a_users(id, comment_count) "
+                cursor.execute("insert into a_users(id) "
                                "values(%s) "
-                               "on conflict do nothing",
-                               (user[0], 20))
+                               "on conflict (id) do nothing",
+                               (user[0],))
                 connection.commit()
 
                 cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
@@ -157,12 +157,12 @@ def create_data():
                 comments = cursor.fetchall()
 
                 for com in comments:
-                    cursor.execute("insert into a_comments "
-                                   "(id, doc_id, user_id, parent_comment_id, text) "
+                    cursor.execute("insert into a_comments(id, doc_id, user_id, parent_comment_id, text) "
                                    "values(%s, %s, %s, %s, %s) "
-                                   "on conflict do nothing",
+                                   "on conflict (id) do nothing",
                                    (com[0], com[1], com[2], com[3], com[4]))
                     connection.commit()
+            print("Finished writing users.\n")
 
             # Close everything.
             cursor.close()

@@ -85,15 +85,23 @@ on conflict (name) do update
 set (doc_count, comment_count) = (EXCLUDED.doc_count, EXCLUDED.comment_count)
 
 select user_id, count(user_id)
-from a_comments c
+from comments
 group by user_id
 order by count(user_id) desc
 limit 10
 
-insert into a_users(id, comment_count)
-values(%s, %s)
-on conflict (id) do update
-set comment_count = EXCLUDED.comment_count
+insert into a_users(id)
+values(%s)
+on conflict (id) do nothing
+
+select id, doc_id, user_id, parent_comment_id, text from comments
+where user_id = %s
+order by length(text) desc
+limit 20
+
+insert into a_comments(id, doc_id, user_id, parent_comment_id, text)
+values(%s, %s, %s, %s, %s)
+on conflict (id) do nothing
 
 select text
 from a_comments
