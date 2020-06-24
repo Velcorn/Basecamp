@@ -67,7 +67,11 @@ def analyze_tone():
 
             print("Generating analysis and writing results to DB...")
             # Translate each comment, generate tone analysis and write it to the DB.
+            count = 0
             for com in comments:
+                if count % 10 == 0:
+                    print(str(count) + "/" + str(len(comments)) + "...")
+
                 # Remove emojis.
                 text = EMOJI.sub(u'', com[1])
 
@@ -86,6 +90,7 @@ def analyze_tone():
                                "where id = %s",
                                (translation, dumps(tones), com[0]))
                 connection.commit()
+                count += 1
 
             cursor.close()
             connection.close()

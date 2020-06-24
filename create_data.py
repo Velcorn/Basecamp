@@ -142,7 +142,9 @@ def create_data():
                            "limit 20")
             users = cursor.fetchall()
 
+            count = 1
             for user in users:
+                print(str(count) + "/" + str(len(users)) + "...")
                 cursor.execute("insert into a_users(id) "
                                "values(%s) "
                                "on conflict (id) do nothing",
@@ -151,8 +153,9 @@ def create_data():
 
                 cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
                                "where user_id = %s "
+                               "where parent_comment_id is null "
                                "order by length(text) desc "
-                               "limit 20",
+                               "limit 10",
                                (user[0],))
                 comments = cursor.fetchall()
 
@@ -162,6 +165,35 @@ def create_data():
                                    "on conflict (id) do nothing",
                                    (com[0], com[1], com[2], com[3], com[4]))
                     connection.commit()
+
+                cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
+                               "where user_id = %s "
+                               "where parent_comment_id is not null "
+                               "and (select parent_comment_id "
+                               "from comments pc where id = parent_comment_id) is null "
+                               "order by length(text) desc "
+                               "limit 10",
+                               (user[0],))
+                answers = cursor.fetchall()
+
+                for ans in answers:
+                    cursor.execute("insert into a_comments(id, doc_id, user_id, parent_comment_id, text) "
+                                   "values(%s, %s, %s, %s, %s) "
+                                   "on conflict (id) do nothing",
+                                   (ans[0], ans[1], ans[2], ans[3], ans[4]))
+                    connection.commit()
+
+                    cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
+                                   "where id = %s",
+                                   (ans[3],))
+                    pc = cursor.fetchall()
+
+                    cursor.execute("insert into a_comments(id, doc_id, user_id, parent_comment_id, text) "
+                                   "values(%s, %s, %s, %s, %s) "
+                                   "on conflict (id) do nothing",
+                                   (pc[0][0], pc[0][1], pc[0][2], pc[0][3], pc[0][4]))
+                    connection.commit()
+                count += 1
             print("Finished writing users.\n")
 
             # Close everything.
