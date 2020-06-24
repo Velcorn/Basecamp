@@ -59,7 +59,7 @@ def analyze_tone():
             connection = connect(**params)
             cursor = connection.cursor()
 
-            cursor.execute("select text "
+            cursor.execute("select id, text "
                            "from a_comments "
                            "where translation is null or tone is null")
             comments = cursor.fetchall()
@@ -72,7 +72,7 @@ def analyze_tone():
                     print(str(count) + "/" + str(len(comments)) + "...")
 
                 # Remove emojis.
-                text = EMOJI.sub(u'', com[0])
+                text = EMOJI.sub(u'', com[1])
 
                 # Translate comment and analyze the tone.
                 translation = translator.translate(text, model_id='de-en').get_result()['translations'][0]['translation']
