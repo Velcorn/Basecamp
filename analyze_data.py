@@ -59,21 +59,20 @@ def analyze_tone():
             connection = connect(**params)
             cursor = connection.cursor()
 
-            cursor.execute("select id, text "
+            cursor.execute("select text "
                            "from a_comments "
-                           "where translation is null or tone is null "
-                           "order by id asc")
+                           "where translation is null or tone is null")
             comments = cursor.fetchall()
 
             print("Generating analysis and writing results to DB...")
             # Translate each comment, generate tone analysis and write it to the DB.
-            count = 0
+            count = 1
             for com in comments:
                 if count % 10 == 0:
                     print(str(count) + "/" + str(len(comments)) + "...")
 
                 # Remove emojis.
-                text = EMOJI.sub(u'', com[1])
+                text = EMOJI.sub(u'', com[0])
 
                 # Translate comment and analyze the tone.
                 translation = translator.translate(text, model_id='de-en').get_result()['translations'][0]['translation']
@@ -123,8 +122,7 @@ def calc_average_tone():
             # calculate their average and write it to the DB.
             print("Calculating document tones...")
             cursor.execute("select d.id "
-                           "from a_documents d "
-                           "order by d.id")
+                           "from a_documents d")
             documents = cursor.fetchall()
 
             for doc in documents:
@@ -162,8 +160,7 @@ def calc_average_tone():
             # calculate their average and write it to the DB.
             print("Calculating category tones...")
             cursor.execute("select c.name "
-                           "from a_categories c "
-                           "order by c.name")
+                           "from a_categories c")
             categories = cursor.fetchall()
 
             for cat in categories:
@@ -199,15 +196,15 @@ def calc_average_tone():
             # calculate their average and write it to the DB.
             print("Calculating user tones...")
             cursor.execute("select id "
-                           "from a_users "
-                           "order by id")
+                           "from a_users")
             users = cursor.fetchall()
 
             for user in users:
                 cursor.execute("select tone "
                                "from a_comments c "
-                               "where c.user_id = %s",
-                               (user[0], ))
+                               "where c.user_id = %s "
+                               "and c.parent_comment_id is null",
+                               (user[0],))
                 comment_tones = cursor.fetchall()
                 comment_tone_list = dict_to_list(comment_tones)
                 average_comment_tone = list_average(comment_tone_list)
@@ -216,6 +213,21 @@ def calc_average_tone():
                                "set comment_tone = %s "
                                "where id = %s",
                                (dumps(average_comment_tone), user[0]))
+                connection.commit()
+
+                cursor.execute("select tone "
+                               "from a_comments c "
+                               "where c.user_id = %s "
+                               "and c.parent_comment_id is not null",
+                               (user[0],))
+                answer_tones = cursor.fetchall()
+                answer_tone_list = dict_to_list(answer_tones)
+                average_answer_tone = list_average(answer_tone_list)
+
+                cursor.execute("update a_users "
+                               "set answer_tone = %s "
+                               "where id = %s",
+                               (dumps(average_answer_tone), user[0]))
                 connection.commit()
 
             cursor.close()
@@ -247,8 +259,7 @@ def analyze_personality():
 
             print("Generating personality insights and writing results to DB...")
             cursor.execute("select id from a_users "
-                           "where personality is null "
-                           "order by id")
+                           "where personality is null")
             users = cursor.fetchall()
 
             # Get translations of all comments for each user and combine them.

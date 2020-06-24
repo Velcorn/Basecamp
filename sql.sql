@@ -19,7 +19,6 @@ tone json);
 create table a_categories(
 name varchar primary key,
 doc_count int,
-comment_count int,
 comment_tone json,
 answers_tone json);
 
@@ -27,6 +26,7 @@ create table a_users(
 id int primary key,
 comment_count int,
 comment_tone json,
+answer_tone json,
 personality text);
 
 select distinct c.year, c.month, c.day
@@ -88,20 +88,34 @@ select user_id, count(user_id)
 from comments
 group by user_id
 order by count(user_id) desc
-limit 10
+limit 20
 
 insert into a_users(id)
 values(%s)
 on conflict (id) do nothing
 
-select id, doc_id, user_id, parent_comment_id, text from comments
+select id, doc_id, user_id, parent_comment_id, text
+from comments
 where user_id = %s
+and parent_comment_id is null
 order by length(text) desc
-limit 20
+limit 10
+
+select id, doc_id, user_id, parent_comment_id, text
+from comments
+where user_id = %s
+and parent_comment_id is null
+and (select parent_comment_id from comments pc where id = parent_comment_id) is null
+order by length(text) desc
+limit 10
 
 insert into a_comments(id, doc_id, user_id, parent_comment_id, text)
 values(%s, %s, %s, %s, %s)
 on conflict (id) do nothing
+
+select id, doc_id, user_id, parent_comment_id, text
+from comments
+where id = %s
 
 select text
 from a_comments

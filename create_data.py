@@ -94,7 +94,7 @@ def create_data():
                                        "join a_comments "
                                        "on c.id = a_comments.parent_comment_id "
                                        "where c.doc_id = %s "
-                                       "order by c.id asc, length(c.text) "
+                                       "order by length(c.text) "
                                        "limit 10",
                                        (doc[0][0], ))
                         comments = cursor.fetchall()
@@ -142,7 +142,7 @@ def create_data():
                            "limit 20")
             users = cursor.fetchall()
 
-            count = 0
+            count = 1
             for user in users:
                 print(str(count) + "/" + str(len(users)) + "...")
                 cursor.execute("insert into a_users(id) "
@@ -151,9 +151,10 @@ def create_data():
                                (user[0],))
                 connection.commit()
 
-                cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
+                cursor.execute("select id, doc_id, user_id, parent_comment_id, text "
+                               "from comments "
                                "where user_id = %s "
-                               "where parent_comment_id is null "
+                               "and parent_comment_id is null "
                                "order by length(text) desc "
                                "limit 10",
                                (user[0],))
@@ -168,7 +169,7 @@ def create_data():
 
                 cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
                                "where user_id = %s "
-                               "where parent_comment_id is not null "
+                               "and parent_comment_id is not null "
                                "and (select parent_comment_id "
                                "from comments pc where id = parent_comment_id) is null "
                                "order by length(text) desc "
@@ -183,7 +184,8 @@ def create_data():
                                    (ans[0], ans[1], ans[2], ans[3], ans[4]))
                     connection.commit()
 
-                    cursor.execute("select id, doc_id, user_id, parent_comment_id, text from comments "
+                    cursor.execute("select id, doc_id, user_id, parent_comment_id, text "
+                                   "from comments "
                                    "where id = %s",
                                    (ans[3],))
                     pc = cursor.fetchall()
