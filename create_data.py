@@ -142,7 +142,7 @@ def create_data():
                            "limit 20")
             users = cursor.fetchall()
 
-            count = 1
+            count = 0
             for user in users:
                 print(str(count) + "/" + str(len(users)) + "...")
                 cursor.execute("insert into a_users(id) "
