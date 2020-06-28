@@ -119,7 +119,7 @@ def create_data():
                                        "set comment_count = EXCLUDED.comment_count",
                                        (doc[0][0], comment_count[0][0]))
 
-                print("Writing categories...")
+                print("Writing category data...")
                 cursor.execute("select count(id), sum(comment_count) "
                                "from a_documents d "
                                "where category = %s",
