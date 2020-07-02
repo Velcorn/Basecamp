@@ -1,3 +1,4 @@
+-- Create tables
 create table a_documents(
 id int primary key,
 url varchar,
@@ -29,6 +30,8 @@ comment_tone json,
 answer_tone json,
 personality text);
 
+
+-- Create data
 select distinct c.year, c.month, c.day
 from comments c
 join documents
@@ -117,11 +120,65 @@ select id, doc_id, user_id, parent_comment_id, text
 from comments
 where id = %s
 
-select text
+
+-- Analyze data
+select id, text
 from a_comments
 where translation is null
-order by id asc
 
 update a_comments
 set translation = %s, tone = %s
+where id = %s
+
+
+-- Calc average tone
+select id
+from a_documents
+
+select tone
+from a_comments c
+where c.doc_id = %s
+and c.parent_comment_id is (not) null
+
+update a_documents
+set tone = %s
+where id = %s
+
+select name
+from a_categories
+
+select tone
+from a_documents
+where category = %s
+
+update a_categories
+set tone = %s
+where name = %s
+
+select id
+from a_users
+
+select tone
+from a_comments
+where user_id = %s
+and parent_comment_id is null
+order by length(text) desc
+limit 10
+
+update a_users
+set comment_tone = %s
+where id = %s
+
+
+-- Personality insights
+select id
+from a_users
+where personality is null
+
+select distinct translation
+from a_comments
+join a_users on user_id = %s
+
+update a_users
+set personality = %s
 where id = %s

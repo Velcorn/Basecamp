@@ -102,147 +102,8 @@ def analyze_tone():
             connection.close()
 
 
-# Calculates the average tone for documents, categories and users.
-def calc_average_tone():
-    ssh = ssh_config()
-    try:
-        with SSHTunnelForwarder(
-                (ssh["host"], 22),
-                ssh_username=ssh["user"],
-                ssh_password=ssh["password"],
-                remote_bind_address=(ssh["rba"], 5432),
-                local_bind_address=("localhost", 8080)) as tunnel:
-            tunnel.start()
-
-            params = db_config()
-            connection = connect(**params)
-            cursor = connection.cursor()
-
-            # Create a list of all tones from all comments/answers from a document,
-            # calculate their average and write it to the DB.
-            print("Calculating document tones...")
-            cursor.execute("select d.id "
-                           "from a_documents d")
-            documents = cursor.fetchall()
-
-            for doc in documents:
-                cursor.execute("select tone "
-                               "from a_comments c "
-                               "where c.doc_id = %s "
-                               "and c.parent_comment_id is not null ",
-                               (doc[0], ))
-                comment_tones = cursor.fetchall()
-                comment_tone_list = dict_to_list(comment_tones)
-                average_comment_tone = list_average(comment_tone_list)
-
-                cursor.execute("update a_documents "
-                               "set comment_tone = %s "
-                               "where id = %s",
-                               (dumps(average_comment_tone), doc[0]))
-                connection.commit()
-
-                cursor.execute("select tone "
-                               "from a_comments c "
-                               "where c.doc_id = %s "
-                               "and c.parent_comment_id is null",
-                               (doc[0],))
-                answer_tones = cursor.fetchall()
-                answer_tone_list = dict_to_list(answer_tones)
-                average_answer_tone = list_average(answer_tone_list)
-
-                cursor.execute("update a_documents "
-                               "set answer_tone = %s "
-                               "where id = %s",
-                               (dumps(average_answer_tone), doc[0]))
-                connection.commit()
-
-            # Create a list of all tones from all documents from a category,
-            # calculate their average and write it to the DB.
-            print("Calculating category tones...")
-            cursor.execute("select c.name "
-                           "from a_categories c")
-            categories = cursor.fetchall()
-
-            for cat in categories:
-                cursor.execute("select comment_tone "
-                               "from a_documents d "
-                               "where d.category = %s",
-                               (cat[0], ))
-                comment_tones = cursor.fetchall()
-                comment_tone_list = dict_to_list(comment_tones)
-                average_comment_tone = list_average(comment_tone_list)
-
-                cursor.execute("update a_categories "
-                               "set comment_tone = %s "
-                               "where name = %s",
-                               (dumps(average_comment_tone), cat[0]))
-                connection.commit()
-
-                cursor.execute("select answer_tone "
-                               "from a_documents d "
-                               "where d.category = %s",
-                               (cat[0],))
-                answer_tones = cursor.fetchall()
-                answer_tone_list = dict_to_list(answer_tones)
-                average_answer_tone = list_average(answer_tone_list)
-
-                cursor.execute("update a_categories "
-                               "set answer_tone = %s "
-                               "where name = %s",
-                               (dumps(average_answer_tone), cat[0]))
-                connection.commit()
-
-            # Create a list of all tones from all comments from a user,
-            # calculate their average and write it to the DB.
-            print("Calculating user tones...")
-            cursor.execute("select id "
-                           "from a_users")
-            users = cursor.fetchall()
-
-            for user in users:
-                cursor.execute("select tone "
-                               "from a_comments c "
-                               "where c.user_id = %s "
-                               "and c.parent_comment_id is null",
-                               (user[0],))
-                comment_tones = cursor.fetchall()
-                comment_tone_list = dict_to_list(comment_tones)
-                average_comment_tone = list_average(comment_tone_list)
-
-                cursor.execute("update a_users "
-                               "set comment_tone = %s "
-                               "where id = %s",
-                               (dumps(average_comment_tone), user[0]))
-                connection.commit()
-
-                cursor.execute("select tone "
-                               "from a_comments c "
-                               "where c.user_id = %s "
-                               "and c.parent_comment_id is not null",
-                               (user[0],))
-                answer_tones = cursor.fetchall()
-                answer_tone_list = dict_to_list(answer_tones)
-                average_answer_tone = list_average(answer_tone_list)
-
-                cursor.execute("update a_users "
-                               "set answer_tone = %s "
-                               "where id = %s",
-                               (dumps(average_answer_tone), user[0]))
-                connection.commit()
-
-            cursor.close()
-            connection.close()
-            return "Calculated tones.\n"
-    except (Exception, Error) as error:
-        return error
-    finally:
-        if connection:
-            cursor.close()
-            connection.close()
-
-
 # Analyze the personality of users and write results to DB.
-def analyze_personality():
+def analyze_pers():
     ssh = ssh_config()
     try:
         with SSHTunnelForwarder(
@@ -264,7 +125,8 @@ def analyze_personality():
 
             # Get translations of all comments for each user and combine them.
             for user in users:
-                cursor.execute("select distinct translation from a_comments "
+                cursor.execute("select distinct translation "
+                               "from a_comments "
                                "join a_users on user_id = %s",
                                (user[0], ))
                 translations = cursor.fetchall()
@@ -299,6 +161,149 @@ def analyze_personality():
             connection.close()
 
 
+# Calculates the average tone for documents, categories and users.
+def calc_averages():
+    ssh = ssh_config()
+    try:
+        with SSHTunnelForwarder(
+                (ssh["host"], 22),
+                ssh_username=ssh["user"],
+                ssh_password=ssh["password"],
+                remote_bind_address=(ssh["rba"], 5432),
+                local_bind_address=("localhost", 8080)) as tunnel:
+            tunnel.start()
+
+            params = db_config()
+            connection = connect(**params)
+            cursor = connection.cursor()
+
+            # Create a list of all tones from all comments/answers from a document,
+            # calculate their average and write it to the DB.
+            print("Calculating document tones...")
+            cursor.execute("select id "
+                           "from a_documents")
+            documents = cursor.fetchall()
+
+            for doc in documents:
+                cursor.execute("select tone "
+                               "from a_comments c "
+                               "where c.doc_id = %s "
+                               "and c.parent_comment_id is null ",
+                               (doc[0], ))
+                comment_tones = cursor.fetchall()
+                comment_tone_list = dict_to_list(comment_tones)
+                average_comment_tone = list_average(comment_tone_list)
+
+                cursor.execute("update a_documents "
+                               "set comment_tone = %s "
+                               "where id = %s",
+                               (dumps(average_comment_tone), doc[0]))
+                connection.commit()
+
+                cursor.execute("select tone "
+                               "from a_comments c "
+                               "where c.doc_id = %s "
+                               "and c.parent_comment_id is not null",
+                               (doc[0],))
+                answer_tones = cursor.fetchall()
+                answer_tone_list = dict_to_list(answer_tones)
+                average_answer_tone = list_average(answer_tone_list)
+
+                cursor.execute("update a_documents "
+                               "set answer_tone = %s "
+                               "where id = %s",
+                               (dumps(average_answer_tone), doc[0]))
+                connection.commit()
+
+            # Create a list of all tones from all documents from a category,
+            # calculate their average and write it to the DB.
+            print("Calculating category tones...")
+            cursor.execute("select name "
+                           "from a_categories")
+            categories = cursor.fetchall()
+
+            for cat in categories:
+                cursor.execute("select comment_tone "
+                               "from a_documents "
+                               "where category = %s",
+                               (cat[0], ))
+                comment_tones = cursor.fetchall()
+                comment_tone_list = dict_to_list(comment_tones)
+                average_comment_tone = list_average(comment_tone_list)
+
+                cursor.execute("update a_categories "
+                               "set comment_tone = %s "
+                               "where name = %s",
+                               (dumps(average_comment_tone), cat[0]))
+                connection.commit()
+
+                cursor.execute("select answer_tone "
+                               "from a_documents d "
+                               "where d.category = %s",
+                               (cat[0],))
+                answer_tones = cursor.fetchall()
+                answer_tone_list = dict_to_list(answer_tones)
+                average_answer_tone = list_average(answer_tone_list)
+
+                cursor.execute("update a_categories "
+                               "set answer_tone = %s "
+                               "where name = %s",
+                               (dumps(average_answer_tone), cat[0]))
+                connection.commit()
+
+            # Create a list of all tones from all comments from a user,
+            # calculate their average and write it to the DB.
+            print("Calculating user tones...")
+            cursor.execute("select id "
+                           "from a_users")
+            users = cursor.fetchall()
+
+            for user in users:
+                cursor.execute("select tone "
+                               "from a_comments "
+                               "where user_id = %s "
+                               "and parent_comment_id is null "
+                               "order by length(text) desc "
+                               "limit 10",
+                               (user[0],))
+                comment_tones = cursor.fetchall()
+                comment_tone_list = dict_to_list(comment_tones)
+                average_comment_tone = list_average(comment_tone_list)
+
+                cursor.execute("update a_users "
+                               "set comment_tone = %s "
+                               "where id = %s",
+                               (dumps(average_comment_tone), user[0]))
+                connection.commit()
+
+                cursor.execute("select tone "
+                               "from a_comments "
+                               "where user_id = %s "
+                               "and parent_comment_id is not null "
+                               "order by length(text) desc "
+                               "limit 10",
+                               (user[0],))
+                answer_tones = cursor.fetchall()
+                answer_tone_list = dict_to_list(answer_tones)
+                average_answer_tone = list_average(answer_tone_list)
+
+                cursor.execute("update a_users "
+                               "set answer_tone = %s "
+                               "where id = %s",
+                               (dumps(average_answer_tone), user[0]))
+                connection.commit()
+
+            cursor.close()
+            connection.close()
+            return "Calculated tones.\n"
+    except (Exception, Error) as error:
+        return error
+    finally:
+        if connection:
+            cursor.close()
+            connection.close()
+
+
 # Converts a dict to a list.
 def dict_to_list(dct):
     lst = []
@@ -320,5 +325,5 @@ def list_average(lst):
 
 
 print(analyze_tone())
-print(calc_average_tone())
-print(analyze_personality())
+print(analyze_pers())
+print(calc_averages())
