@@ -28,7 +28,13 @@ id int primary key,
 comment_count int,
 comment_tone json,
 answer_tone json,
-personality text);
+personality json);
+
+create table a_averages(
+name varchar primary key,
+comment_tone json,
+answer_tone json,
+personality json);
 
 
 -- Create data

@@ -64,7 +64,7 @@ def analyze_tone():
                            "where translation is null or tone is null")
             comments = cursor.fetchall()
 
-            print("Generating analysis and writing results to DB...")
+            print("Generating tone analyses and writing results to DB...")
             # Translate each comment, generate tone analysis and write it to the DB.
             count = 1
             for com in comments:
@@ -93,7 +93,7 @@ def analyze_tone():
 
             cursor.close()
             connection.close()
-            return "Finished writing results to DB.\n"
+            return "Finished writing tone analyses to DB.\n"
     except (Exception, Error) as error:
         return error
     finally:
@@ -152,7 +152,7 @@ def analyze_pers():
 
             cursor.close()
             connection.close()
-            return "Finished writing results to DB.\n"
+            return "Finished writing personality insights to DB.\n"
     except (Exception, Error) as error:
         return error
     finally:
@@ -179,7 +179,8 @@ def calc_averages():
 
             # Create a list of all tones from all comments/answers from a document,
             # calculate their average and write it to the DB.
-            print("Calculating document tones...")
+            print("Calculating average and writing results to DB...")
+            print("Tone for documents...")
             cursor.execute("select id "
                            "from a_documents")
             documents = cursor.fetchall()
@@ -217,7 +218,7 @@ def calc_averages():
 
             # Create a list of all tones from all documents from a category,
             # calculate their average and write it to the DB.
-            print("Calculating category tones...")
+            print("Tone for categories...")
             cursor.execute("select name "
                            "from a_categories")
             categories = cursor.fetchall()
@@ -253,7 +254,7 @@ def calc_averages():
 
             # Create a list of all tones from all comments from a user,
             # calculate their average and write it to the DB.
-            print("Calculating user tones...")
+            print("Tone for users...")
             cursor.execute("select id "
                            "from a_users")
             users = cursor.fetchall()
@@ -293,9 +294,60 @@ def calc_averages():
                                (dumps(average_answer_tone), user[0]))
                 connection.commit()
 
+            # Calculate averages for all categories/comments and user comments/personality insights
+            print("Tone for all comments...")
+            cursor.execute("select comment_tone "
+                           "from a_categories")
+            comment_tones = cursor.fetchall()
+            comment_tone_list = dict_to_list(comment_tones)
+            average_comment_tone = list_average(comment_tone_list)
+
+            cursor.execute("select answer_tone "
+                           "from a_categories")
+            answer_tones = cursor.fetchall()
+            answer_tone_list = dict_to_list(answer_tones)
+            average_answer_tone = list_average(answer_tone_list)
+
+            cursor.execute("insert into a_averages(name, comment_tone, answer_tone) "
+                           "values(%s, %s, %s) "
+                           "on conflict (name) do update "
+                           "set (comment_tone, answer_tone) = (EXCLUDED.comment_tone, EXCLUDED.answer_tone)",
+                           ("Average Tone Overall", dumps(average_comment_tone), dumps(average_answer_tone)))
+            connection.commit()
+
+            print("Tone and personality for all users...")
+            cursor.execute("select comment_tone "
+                           "from a_users")
+            comment_tones = cursor.fetchall()
+            comment_tone_list = dict_to_list(comment_tones)
+            average_comment_tone = list_average(comment_tone_list)
+
+            cursor.execute("select answer_tone "
+                           "from a_users")
+            answer_tones = cursor.fetchall()
+            answer_tone_list = dict_to_list(answer_tones)
+            average_answer_tone = list_average(answer_tone_list)
+
+            cursor.execute("select personality "
+                           "from a_users")
+            insights = cursor.fetchall()
+            insights_list = []
+            for i in insights:
+                for key, value in i[0].items():
+                    insights_list.append([key, float(value)])
+            average_insights = list_average(insights_list)
+
+            cursor.execute("insert into a_averages(name, comment_tone, answer_tone, personality) "
+                           "values(%s, %s, %s, %s) "
+                           "on conflict (name) do update "
+                           "set (comment_tone, answer_tone, personality) = "
+                           "(EXCLUDED.comment_tone, EXCLUDED.answer_tone, EXCLUDED.personality)",
+                           ("Average TP Users", dumps(average_comment_tone),
+                            dumps(average_answer_tone), dumps(average_insights)))
+            connection.commit()
             cursor.close()
             connection.close()
-            return "Calculated tones.\n"
+            return "Finished writing averages to DB.\n"
     except (Exception, Error) as error:
         return error
     finally:
@@ -324,6 +376,6 @@ def list_average(lst):
     return average
 
 
-print(analyze_tone())
-print(analyze_pers())
+# print(analyze_tone())
+# print(analyze_pers())
 print(calc_averages())
