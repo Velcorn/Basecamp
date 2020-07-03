@@ -137,7 +137,21 @@ set translation = %s, tone = %s
 where id = %s
 
 
--- Calc average tone
+-- Personality insights
+select id
+from a_users
+where personality is null
+
+select distinct translation
+from a_comments
+join a_users on user_id = %s
+
+update a_users
+set personality = %s
+where id = %s
+
+
+-- Calc averages
 select id
 from a_documents
 
@@ -175,16 +189,18 @@ update a_users
 set comment_tone = %s
 where id = %s
 
+select comment_tone
+from a_categories
 
--- Personality insights
-select id
+insert into a_averages(name, comment_tone, answer_tone)
+values(%s, %s, %s)
+on conflict (name) do update
+set (comment_tone, answer_tone) = (EXCLUDED.comment_tone, EXCLUDED.answer_tone)
+
+select comment_tone
 from a_users
-where personality is null
 
-select distinct translation
-from a_comments
-join a_users on user_id = %s
-
-update a_users
-set personality = %s
-where id = %s
+insert into a_averages(name, comment_tone, answer_tone, personality)
+values(%s, %s, %s, %s)
+on conflict (name) do update
+set (comment_tone, answer_tone, personality) = (EXCLUDED.comment_tone, EXCLUDED.answer_tone, EXCLUDED.personality)
