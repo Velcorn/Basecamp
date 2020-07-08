@@ -7,7 +7,7 @@ from re import compile, UNICODE
 from json import dumps
 
 
-# Set up Tone Analyzer and Translator from Watson
+# Set up Translator, Tone Analyzer and Personality Insights from Watson
 api = api_config()
 API_KEY_TL = api["key_tl"]
 API_KEY_TA = api["key_ta"]
