@@ -210,4 +210,4 @@ def create_data():
             connection.close()
 
 
-create_data()
+print(create_data())

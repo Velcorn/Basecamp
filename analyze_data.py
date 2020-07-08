@@ -376,6 +376,6 @@ def list_average(lst):
     return average
 
 
-analyze_tone()
-analyze_pers()
-calc_averages()
+print(analyze_tone())
+print(analyze_pers())
+print(calc_averages())
