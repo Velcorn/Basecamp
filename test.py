@@ -4,7 +4,7 @@ from config import api_config
 from json import dumps
 
 
-# Set up Tone Analyzer and Translator from Watson
+# Set up Translator and Tone Analyzer from Watson
 api = api_config()
 API_KEY_TL = api["key_tl"]
 API_KEY_TA = api["key_ta"]

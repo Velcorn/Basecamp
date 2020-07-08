@@ -75,12 +75,14 @@ def analyze_tone():
                 text = EMOJI.sub(u'', com[1])
 
                 # Translate comment and analyze the tone.
-                translation = translator.translate(text, model_id='de-en').get_result()['translations'][0]['translation']
-                tone_analysis = tone_analyzer.tone({'text': translation}, content_type='text/plain').get_result()
+                translation = translator.translate(text,
+                                                   model_id='de-en').get_result()['translations'][0]['translation']
+                tone_analysis = tone_analyzer.tone({'text': translation},
+                                                   content_type='text/plain').get_result()['document_tone']['tones']
 
                 # Write tone analysis to sorted dict.
                 tones = {}
-                for tone in tone_analysis['document_tone']['tones']:
+                for tone in tone_analysis:
                     tones[tone['tone_name']] = tone['score']
                 tones = dict(sorted(tones.items()))
 
