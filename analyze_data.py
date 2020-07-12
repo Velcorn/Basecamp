@@ -207,7 +207,7 @@ def calc_averages():
                            "from a_documents")
             documents = cursor.fetchall()
 
-            count = 0
+            count = 1
             for doc in documents:
                 if count % 10 == 0:
                     print(str(count) + "/" + str(len(documents)))
@@ -252,7 +252,7 @@ def calc_averages():
                            "from a_categories")
             categories = cursor.fetchall()
 
-            count = 0
+            count = 1
             for cat in categories:
                 print(str(count) + "/" + str(len(categories)))
 
@@ -294,7 +294,7 @@ def calc_averages():
                            "from a_users")
             users = cursor.fetchall()
 
-            count = 0
+            count = 1
             for user in users:
                 print(str(count) + "/" + str(len(users)))
                 cursor.execute("select tone "
