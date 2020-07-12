@@ -161,6 +161,26 @@ def analyze_pers():
             connection.close()
 
 
+# Converts a dict to a list.
+def dict_to_list(dct):
+    lst = []
+    for item in dct:
+        if item[0] != {}:
+            for key, value in item[0].items():
+                lst.append([key, float(value)])
+    return sorted(lst, key=lambda x: x[0])
+
+
+# Calculates the average of elements in a list.
+def list_average(lst):
+    average = {}
+    for key, value in lst:
+        average.setdefault(key, []).append(value)
+    for key, value in average.items():
+        average[key] = round(sum(value) / len(value), 6)
+    return average
+
+
 # Calculates the average tone for documents, categories and users.
 def calc_averages():
     ssh = ssh_config()
@@ -354,26 +374,6 @@ def calc_averages():
         if connection:
             cursor.close()
             connection.close()
-
-
-# Converts a dict to a list.
-def dict_to_list(dct):
-    lst = []
-    for item in dct:
-        if item[0] != {}:
-            for key, value in item[0].items():
-                lst.append([key, float(value)])
-    return sorted(lst, key=lambda x: x[0])
-
-
-# Calculates the average of elements in a list.
-def list_average(lst):
-    average = {}
-    for key, value in lst:
-        average.setdefault(key, []).append(value)
-    for key, value in average.items():
-        average[key] = round(sum(value) / len(value), 6)
-    return average
 
 
 print(analyze_tone())
