@@ -174,12 +174,12 @@ def dict_to_list(dct):
 
 
 # Calculates the average of elements in a list.
-def list_average(lst):
+def list_average(lst, length):
     average = {}
     for key, value in lst:
         average.setdefault(key, []).append(value)
     for key, value in average.items():
-        average[key] = round(sum(value) / len(value), 6)
+        average[key] = round(sum(value) / length, 6)
     return average
 
 
@@ -401,26 +401,6 @@ def calc_averages():
             connection.close()
 
 
-# Converts a dict to a list.
-def dict_to_list(dct):
-    lst = []
-    for item in dct:
-        if item[0] != {}:
-            for key, value in item[0].items():
-                lst.append([key, float(value)])
-    return sorted(lst, key=lambda x: x[0])
-
-
-# Calculates the average of elements in a list.
-def list_average(lst, length):
-    average = {}
-    for key, value in lst:
-        average.setdefault(key, []).append(value)
-    for key, value in average.items():
-        average[key] = round(sum(value) / length, 6)
-    return average
-
-
-# print(analyze_tone())
-# print(analyze_pers())
+print(analyze_tone())
+print(analyze_pers())
 print(calc_averages())
