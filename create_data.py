@@ -209,6 +209,3 @@ def create_data():
         if connection:
             cursor.close()
             connection.close()
-
-
-print(create_data())

@@ -399,8 +399,3 @@ def calc_averages():
         if connection:
             cursor.close()
             connection.close()
-
-
-print(analyze_tone())
-print(analyze_pers())
-print(calc_averages())
