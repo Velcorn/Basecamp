@@ -210,7 +210,7 @@ def calc_averages():
             count = 1
             for doc in documents:
                 if count % 10 == 0:
-                    print(str(count) + "/" + str(len(documents)))
+                    print(f"{count}/{len(documents)}")
 
                 cursor.execute("select tone "
                                "from a_comments c "
@@ -254,7 +254,7 @@ def calc_averages():
 
             count = 1
             for cat in categories:
-                print(str(count) + "/" + str(len(categories)))
+                print(f"{count}/{len(categories)}")
 
                 cursor.execute("select comment_tone "
                                "from a_documents "
@@ -296,7 +296,7 @@ def calc_averages():
 
             count = 1
             for user in users:
-                print(str(count) + "/" + str(len(users)))
+                print(f"{count}/{len(users)}")
                 cursor.execute("select tone "
                                "from a_comments "
                                "where user_id = %s "

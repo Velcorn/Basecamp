@@ -3,7 +3,7 @@ from psycopg2 import connect, Error
 from config import ssh_config, db_config
 
 
-# Transfer relevant document and comment data to new table and generate remaining data.
+# Transfer relevant document and comment data to new tables and generate remaining data.
 def create_data():
     categories = ["Gesundheit", "Kultur", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
     config = ssh_config()
@@ -21,11 +21,12 @@ def create_data():
             cursor = connection.cursor()
 
             for category in categories:
-                print("Creating data from " + category + "...")
+                print(f"Creating data from {category}...")
 
                 # Category search patterns for queries.
-                like_pattern = '%{}%'.format("\"channel\": " + "\"" + category + "\"")
-                equals_pattern = '{}'.format(category)
+                like_pattern = f"%\"channel\": \"{category}\"%"
+                # like_pattern = '%{}%'.format("\"channel\": " + "\"" + category + "\"")
+                equals_pattern = f"{category}"
 
                 cursor.execute("select distinct c.year, c.month, c.day "
                                "from comments c "
@@ -132,7 +133,7 @@ def create_data():
                                "set (doc_count, comment_count) = (EXCLUDED.doc_count, EXCLUDED.comment_count)",
                                (category, counts[0][0], counts[0][1]))
                 connection.commit()
-                print("Finished creating data from " + category + ".\n")
+                print(f"Finished creating data from {category}.\n")
 
             print("Writing users...")
             cursor.execute("select user_id "
@@ -144,7 +145,7 @@ def create_data():
 
             count = 1
             for user in users:
-                print(str(count) + "/" + str(len(users)) + "...")
+                print(f"{count}/{len(users)}...")
                 cursor.execute("insert into a_users(id) "
                                "values(%s) "
                                "on conflict (id) do nothing",
