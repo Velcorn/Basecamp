@@ -19,13 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="Minor refactoring">
+    <list default="true" id="ce3d1a31-9dda-4a1e-aeb2-15b6d89527bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analyze_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/analyze_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/create_data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update.py" beforeDir="false" afterPath="$PROJECT_DIR$/update.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -494,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595364729565</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Added more comments and minor Readme update">
+      <created>1597048776417</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1597048776417</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -520,7 +522,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove tone_analysis.txt for testing purposes" />
     <MESSAGE value="Procfile" />
     <MESSAGE value="Minor text files" />
     <MESSAGE value="Postgres try #1" />
@@ -545,7 +546,8 @@
     <MESSAGE value="Minor text fixes" />
     <MESSAGE value="Example .ini files and README.md" />
     <MESSAGE value="Minor refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor refactoring" />
+    <MESSAGE value="Added more comments and minor Readme update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added more comments and minor Readme update" />
   </component>
   <component name="WindowStateProjectService">
     <state x="346" y="23" key="#analyze_data_(1)" timestamp="1590941388030">
@@ -567,10 +569,10 @@
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1593219519732" />
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589286537473" />
     <state x="557" y="130" width="655" height="617" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1016@0.0.1920.1016" timestamp="1590615883456" />
-    <state x="296" y="0" width="1096" height="1014" key="CommitChangelistDialog2" timestamp="1595365229704">
+    <state x="296" y="0" width="1096" height="1014" key="CommitChangelistDialog2" timestamp="1597048775900">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1595365229704" />
+    <state x="296" y="0" key="CommitChangelistDialog2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1597048775900" />
     <state x="296" y="0" key="CommitChangelistDialog2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307222206" />
     <state x="444" y="0" width="1096" height="1014" key="CommitChangelistDialog2/0.0.1920.1016@0.0.1920.1016" timestamp="1593700163092" />
     <state x="93" y="93" width="1095" height="495" key="DiffContextDialog" timestamp="1591137690782">
@@ -649,10 +651,10 @@
     </state>
     <state x="155" y="0" key="SettingsEditor/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1590540859103" />
     <state x="155" y="0" key="SettingsEditor/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307188437" />
-    <state x="233" y="69" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1595364730593">
+    <state x="233" y="69" width="1000" height="652" key="Vcs.Push.Dialog.v2" timestamp="1597048778832">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1595364730593" />
+    <state x="233" y="69" key="Vcs.Push.Dialog.v2/-1920.0.1280.680/0.0.1280.680/1920.0.1280.680@0.0.1280.680" timestamp="1597048778832" />
     <state x="233" y="69" key="Vcs.Push.Dialog.v2/0.0.1280.680/1920.0.1280.680/-1920.0.1280.680@0.0.1280.680" timestamp="1589307223605" />
     <state x="350" y="103" width="1000" height="652" key="Vcs.Push.Dialog.v2/0.0.1920.1016@0.0.1920.1016" timestamp="1593700167513" />
     <state x="100" y="100" width="1720" height="816" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1590624384098">
