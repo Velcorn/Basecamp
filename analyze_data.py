@@ -7,7 +7,7 @@ from re import compile, UNICODE
 from json import dumps
 
 
-# Set up Translator, Tone Analyzer and Personality Insights from Watson
+# Set up Translator, Tone Analyzer and Personality Insights from Watson.
 api = api_config()
 API_KEY_TL = api["key_tl"]
 API_KEY_TA = api["key_ta"]
@@ -65,25 +65,25 @@ def analyze_tone():
             comments = cursor.fetchall()
 
             print("Generating tone analyses and writing results to DB...")
-            # Translate each comment, generate tone analysis and write it to the DB.
+            # Translate each comment, generate tone analysis and write both to the DB.
             count = 1
             for com in comments:
                 if count % 10 == 0:
                     print(str(count) + "/" + str(len(comments)) + "...")
 
                 # Remove emojis.
-                text = EMOJI.sub(u'', com[1])
+                text = EMOJI.sub(u"", com[1])
 
                 # Translate comment and analyze the tone.
                 translation = translator.translate(text,
-                                                   model_id='de-en').get_result()['translations'][0]['translation']
-                tone_analysis = tone_analyzer.tone({'text': translation},
-                                                   content_type='text/plain').get_result()['document_tone']['tones']
+                                                   model_id="de-en").get_result()["translations"][0]["translation"]
+                tone_analysis = tone_analyzer.tone({"text": translation},
+                                                   content_type="text/plain").get_result()["document_tone"]["tones"]
 
-                # Write tone analysis to sorted dict.
+                # Convert tone analysis to sorted dict.
                 tones = {}
                 for tone in tone_analysis:
-                    tones[tone['tone_name']] = tone['score']
+                    tones[tone["tone_name"]] = tone["score"]
                 tones = dict(sorted(tones.items()))
 
                 cursor.execute("update a_comments "
@@ -104,7 +104,7 @@ def analyze_tone():
             connection.close()
 
 
-# Analyze the personality of users and write results to DB.
+# Analyze the personality of users and write results to the DB.
 def analyze_pers():
     ssh = ssh_config()
     try:
@@ -121,11 +121,12 @@ def analyze_pers():
             cursor = connection.cursor()
 
             print("Generating personality insights and writing results to DB...")
+            # Get users without personality insights.
             cursor.execute("select id from a_users "
                            "where personality is null")
             users = cursor.fetchall()
 
-            # Get translations of all comments for each user and combine them.
+            # Get translations of all comments for each user, combine them and analyze the resulting text.
             for user in users:
                 cursor.execute("select distinct translation "
                                "from a_comments "
@@ -136,15 +137,15 @@ def analyze_pers():
                 for trans in translations:
                     text.append(trans[0].replace("\n", " "))
 
-                pers_insight = pers_analyzer.profile({'text': text}, content_type='text/plain',
-                                                     accept='application/json').get_result()
+                pers_insight = pers_analyzer.profile({"text": text}, content_type="text/plain",
+                                                     accept="application/json").get_result()
 
                 personality = {}
-                for trait in pers_insight['personality']:
-                    if trait['name'] == "Emotional range":
-                        personality['Neuroticism'] = round(trait['percentile'], 6)
+                for trait in pers_insight["personality"]:
+                    if trait["name"] == "Emotional range":
+                        personality["Neuroticism"] = round(trait["percentile"], 6)
                     else:
-                        personality[trait['name']] = round(trait['percentile'], 6)
+                        personality[trait["name"]] = round(trait["percentile"], 6)
 
                 cursor.execute("update a_users "
                                "set personality = %s "
@@ -183,7 +184,7 @@ def list_average(lst, length):
     return average
 
 
-# Calculates the average tone for documents, categories and users.
+# Calculate the average tone for documents, categories and users and write it to the DB.
 def calc_averages():
     ssh = ssh_config()
     try:
@@ -334,7 +335,8 @@ def calc_averages():
                 connection.commit()
                 count += 1
 
-            # Calculate averages for all categories/comments and user comments/personality insights
+            # Calculate averages for all categories, comments and user comments/personality insights
+            # and write them to the DB.
             print("\nTone for all comments...")
             cursor.execute("select comment_tone "
                            "from a_categories")

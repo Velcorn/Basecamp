@@ -2,10 +2,13 @@ from sshtunnel import SSHTunnelForwarder
 from psycopg2 import connect, Error
 from config import ssh_config, db_config
 
+# Categories to filter for.
+categories = ["Gesundheit", "Kultur", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
 
-# Transfer relevant document and comment data to new tables and generate remaining data.
+
+# Transfer relevant document and comment data to new tables and generate category and user tables.
 def create_data():
-    categories = ["Gesundheit", "Kultur", "Netzwelt", "Panorama", "Politik", "Sport", "Wirtschaft", "Wissenschaft"]
+    # Connect to the server using SSH tunnel forwarding.
     config = ssh_config()
     try:
         with SSHTunnelForwarder(
@@ -28,6 +31,7 @@ def create_data():
                 # like_pattern = '%{}%'.format("\"channel\": " + "\"" + category + "\"")
                 equals_pattern = f"{category}"
 
+                # Get all days with document and/or comment data from the DB.
                 cursor.execute("select distinct c.year, c.month, c.day "
                                "from comments c "
                                "join documents "
@@ -44,6 +48,7 @@ def create_data():
                     day = str(day[2]) if int(day[2]) > 10 else "0" + str(day[2])
                     day_pattern = '%{}%'.format(year + "-" + month + "-" + day)
 
+                    # Get all documents and their comment count for the day.
                     cursor.execute("select distinct d.id, d.url, d.title, count(comments) "
                                    "from documents d "
                                    "join comments "
@@ -57,6 +62,9 @@ def create_data():
                                    (like_pattern, day_pattern, ))
                     doc = cursor.fetchall()
 
+                    # If a document exists on the day, write it to the DB,
+                    # grab the 10 longest answer comments and their parent comments from it and write them to the DB.
+                    # Finally, add the comment count to the document.
                     if doc:
                         cursor.execute("insert into a_documents(id, url, title, category) "
                                        "values(%s, %s, %s, %s) "
@@ -121,6 +129,7 @@ def create_data():
                                        (doc[0][0], comment_count[0][0]))
 
                 print("Writing category data...")
+                # Write categories with the amount of documents and comments to the DB.
                 cursor.execute("select count(id), sum(comment_count) "
                                "from a_documents d "
                                "where category = %s",
@@ -136,6 +145,7 @@ def create_data():
                 print(f"Finished creating data from {category}.\n")
 
             print("Writing users...")
+            # Get the top 20 commenting users, their 10 longest comments and answers each and write them to the DB.
             cursor.execute("select user_id "
                            "from comments "
                            "group by user_id "
