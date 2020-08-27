@@ -23,32 +23,31 @@ def create_data():
             connection = connect(**params)
             cursor = connection.cursor()
 
+            # Get all days with document and/or comment data from the DB.
+            cursor.execute("select distinct c.year, c.month, c.day "
+                           "from comments c "
+                           "join documents "
+                           "on doc_id = documents.id "
+                           "where user_id is not null "
+                           "group by c.year, c.month, c.day")
+            days = cursor.fetchall()
+
             for category in categories:
                 print(f"Creating data from {category}...")
 
                 # Category search patterns for queries.
                 like_pattern = f"%\"channel\": \"{category}\"%"
-                # like_pattern = '%{}%'.format("\"channel\": " + "\"" + category + "\"")
                 equals_pattern = f"{category}"
-
-                # Get all days with document and/or comment data from the DB.
-                cursor.execute("select distinct c.year, c.month, c.day "
-                               "from comments c "
-                               "join documents "
-                               "on doc_id = documents.id "
-                               "where user_id is not null "
-                               "group by c.year, c.month, c.day")
-                days = cursor.fetchall()
 
                 print("Writing documents and comments...")
                 for day in days:
                     # Create a day pattern for query.
                     year = str(day[0])
-                    month = str(day[1]) if int(day[1]) > 10 else "0" + str(day[1])
-                    day = str(day[2]) if int(day[2]) > 10 else "0" + str(day[2])
-                    day_pattern = '%{}%'.format(year + "-" + month + "-" + day)
+                    month = str(day[1]) if int(day[1]) > 9 else "0" + str(day[1])
+                    day = str(day[2]) if int(day[2]) > 9 else "0" + str(day[2])
+                    day_pattern = f"%{year + '-' + month + '-' + day}%"
 
-                    # Get all documents and their comment count for the day.
+                    # Get one document and its comment count for the day.
                     cursor.execute("select distinct d.id, d.url, d.title, count(comments) "
                                    "from documents d "
                                    "join comments "
